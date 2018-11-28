@@ -1,0 +1,47 @@
+<block>
+    <view class="oil-water-index">
+        <view class="item" wx:key="{{item.$$original.carId}}" wx:for="{{loopArray0}}"
+        wx:for-item="item">
+            <view class="top-title">{{item.$$original.projSubName}}</view>
+            <view class="childWrap" wx:key="{{childItem.$$original.simno}}"
+            bindtap="handleToDetail" wx:for="{{item.$anonymousCallee__3}}" wx:for-item="childItem"
+            data-e-handleToDetail-so="this" data-e-handleToDetail-a-a="{{childItem.$$original}}">
+                <view class="center">
+                    <view class="title">{{childItem.$$original.carNumber}}</view>
+                    <view class="box">
+                        <view class="box-left">
+                            <view class="name">{{type == 4 ? "加油次数" : "加水次数"}}</view>
+                            <view class="value">{{childItem.$loopState__temp2}} 次</view>
+                        </view>
+                        <view class="box-right">
+                            <view class="name">{{type == 4 ? "加油量" : "加水量"}}</view>
+                            <view class="value">{{childItem.$loopState__temp4}}</view>
+                        </view>
+                    </view>
+                    <view class="box">
+                        <view class="box-left">
+                            <view class="name">{{type == 4 ? "耗油量" : "洒水量"}}</view>
+                            <view class="value">{{childItem.$loopState__temp6}}</view>
+                        </view>
+                        <view class="box-right">
+                            <view class="name">{{type == 4 ? "油费" : "耗油量"}}</view>
+                            <view class="value">{{childItem.$loopState__temp8}}</view>
+                        </view>
+                    </view>
+                    <block wx:if="{{type == 5}}">
+                        <view class="box">
+                            <view class="box-left">
+                                <view class="name">行驶里程</view>
+                                <view class="value">{{childItem.$loopState__temp10}}{{" "}} km</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="{{childItem.$loopState__temp12}}">
+                    <text class="btn-name">详情</text>
+                    <image class="image" src="{{Arrow}}" />
+                </view>
+            </view>
+        </view>
+    </view>
+</block>

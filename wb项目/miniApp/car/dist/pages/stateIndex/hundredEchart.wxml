@@ -1,0 +1,11 @@
+<block>
+    <view class="echart-wrap">
+        <block wx:if="{{!noData}}">
+            <ec-canvas id="mychart-HundredEchart" __triggerObserer="{{ _triggerObserer }}"
+            canvas-id="mychart-HundredEchart" canvas-disable="{{false}}" ec="{{ec}}"></ec-canvas>
+        </block>
+        <block wx:if="{{!!noData}}">
+            <view class="no-date">暂无数据</view>
+        </block>
+    </view>
+</block>

@@ -1,0 +1,97 @@
+<block>
+    <view class="search-container">
+        <view class="search-wrap">
+            <block wx:if="{{!!isProject}}">
+                <view class="item">
+                    <view class="left">
+                        <view class="title ">选择项目</view>
+                    </view>
+                    <view class="right" bindtap="handleProjectChoice">
+                        <text class="title project-title">{{!!choiceProjectItem ? choiceProjectItem.text : "请选择项目"}}</text>
+                        <block
+                        wx:if="{{projectList.length == 1 && projectList[0].children.length > 0}}">
+                            <image class="image" src="{{Arrow}}" />
+            </block>
+            </view>
+            </view>
+</block>
+<block wx:if="{{!!isProjectType}}">
+    <view class="item">
+        <view class="left">
+            <view class="title">设备类型</view>
+        </view>
+        <view class="right" bindtap="handleProjectTypeChoice">
+            <text class="title">{{!!choiceProjectType ? choiceProjectType.typeName : "全部"}}</text>
+            <image
+            class="image" src="{{Arrow}}" />
+        </view>
+    </view>
+</block>
+<block wx:if="{{!!isCar}}">
+    <view class="item">
+        <view class="left">
+            <view class="title">选择车辆</view>
+        </view>
+        <view class="right" bindtap="handleCarChoice">
+            <block wx:if="{{!isMultiSelect}}">
+                <text class="title">{{!!choiceCarItem ? choiceCarItem.text : ""}}</text>
+            </block>
+            <block wx:if="{{!!isMultiSelect}}">
+                <text class="title">{{anonymousState__temp}}</text>
+            </block>
+            <image class="image" src="{{Arrow}}" />
+        </view>
+    </view>
+</block>
+<block wx:if="{{!!isTime}}">
+    <view class="item">
+        <view class="left">
+            <view class="title">台班规则</view>
+        </view>
+        <picker class="right" value="{{dayHour - 1}}" bindchange="handleRuleChoice"
+        range="{{timeArr}}">
+            <text class="title">{{timeArr[dayHour - 1]}}</text>
+            <image class="image" src="{{Arrow}}" />
+        </picker>
+    </view>
+</block>
+<block wx:if="{{!!isDateType}}">
+    <view class="item">
+        <view class="left">
+            <view class="title">日期选择</view>
+        </view>
+        <view class="right right-data-type">
+            <view class="{{item.$loopState__temp3}}" wx:key="{{index}}" bindtap="handleDataTypeChoice"
+            wx:for="{{loopArray0}}" wx:for-item="item" wx:for-index="index" data-e-handleDataTypeChoice-so="this"
+            data-e-handleDataTypeChoice-a-a="{{index + 1}}">{{item.$$original.name}}</view>
+        </view>
+    </view>
+</block>
+<block wx:if="{{!!isDate}}">
+    <view class="item">
+        <view class="left">
+            <view class="title">选择日期</view>
+        </view>
+        <view class="right date-choice" bindtap="handleDateChoice">
+            <text class="value">{{anonymousState__temp4}}</text>
+            <image class="image" src="{{Arrow}}" />
+        </view>
+    </view>
+</block>
+<block wx:if="{{!!isType}}">
+    <view class="item">
+        <view class="left">
+            <view class="title">告警类型</view>
+        </view>
+        <view class="right right-alarm">
+            <view class="{{item.$loopState__temp6}}" wx:key="{{item.$$original.value}}"
+            bindtap="handleTypeChoice" wx:for="{{loopArray1}}" wx:for-item="item" data-e-handleTypeChoice-so="this"
+            data-e-handleTypeChoice-a-a="{{item.$$original}}">{{item.$$original.name}}</view>
+        </view>
+    </view>
+</block>
+<view bindtap="handleSearch" class="{{anonymousState__temp7}}">查询</view>
+</view>
+<calendar __triggerObserer="{{ _triggerObserer }}"></calendar>
+</view>
+</block>

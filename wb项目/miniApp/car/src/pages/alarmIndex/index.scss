@@ -1,0 +1,68 @@
+.alarm-index {
+  padding: 30px 30px 15px 30px;
+  .item {
+    position: relative;
+    margin-bottom: 15px;
+    background: #fff;
+    .top-title {
+      font-size: 25px;
+      color: #666;
+      line-height: 75px;
+      padding-left: 25px;
+      border-bottom: 1px solid #dddd;
+    }
+    .childWrap {
+      border-bottom: 1px solid #dddd;
+    }
+    .center {
+      position: relative;
+      padding: 25px 25px 10px 25px;
+      .title {
+        font-size: 35px;
+        color: #333;
+        line-height: 75px;
+      }
+      .car-name {
+        font-size: 35px;
+        color: #333;
+      }
+      .box {
+        color: #333;
+        .title {
+          font-size: 24px;
+          color: #666;
+        }
+        .value {
+          font-size: 28px;
+          color: #333;
+        }
+      }
+      .wran-btn {
+        position: absolute;
+        right: 30px;
+        top: 40px;
+        font-size: 21px;
+        padding: 10px;
+        border-radius: 3px;
+        &.type1 {
+          color: #f56c6c;
+          background-color: #fef0f0;
+
+          border: solid 0px #f56c6c;
+        }
+        &.type2 {
+          color: #409eff;
+          background-color: #ecf5ff;
+
+          border: solid 0px #94c6fb;
+        }
+        &.type3 {
+          color: #e6a23c;
+          background-color: #fbf4ea;
+
+          border: solid 0px #f8d7a2;
+        }
+      }
+    }
+  }
+}

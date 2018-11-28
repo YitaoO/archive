@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/searchList/index",
+    "pages/stateIndex/index",
+    "pages/travelDetail/index",
+    "pages/registration/index",
+    "pages/traceDetail/index",
+    "pages/treeList/index",
+    "pages/oilAndWaterDetail/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#58bdf2",
+    "navigationBarTitleText": "设备动态管理",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
+  }
+}

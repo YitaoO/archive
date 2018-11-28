@@ -1,0 +1,67 @@
+.oil-water-index {
+  padding: 30px 30px 15px 30px;
+  .item {
+    background: #fff;
+    position: relative;
+    margin-bottom: 20rpx;
+    .top-title {
+      font-size: 25px;
+      color: #666;
+      line-height: 75px;
+      padding-left: 25px;
+      border-bottom: 1px solid #dddd;
+    }
+    .childWrap {
+      position: relative;
+      border-bottom: 1px solid #dddd;
+    }
+    .childWrap:last-child {
+      border-bottom: none;
+    }
+    .center {
+      padding: 25px 25px 10px 25px;
+
+      .title {
+        font-size: 35px;
+        color: #333;
+        line-height: 75px;
+      }
+      .box {
+        display: flex;
+        padding-bottom: 20px;
+        .box-left,
+        .box-right {
+          flex: 1;
+          .name {
+            font-size: 21px;
+            color: #666;
+          }
+          .value {
+            font-size: 28px;
+            color: #333;
+          }
+        }
+      }
+    }
+    .item-button {
+      position: absolute;
+      bottom: 30px;
+      right: 25px;
+
+      &.hide {
+        display: none;
+      }
+
+      .btn-name {
+        font-size: 21px;
+        color: #20abf3;
+        padding-right: 15px;
+      }
+      .image {
+        display: inline-block;
+        width: 10px;
+        height: 16px;
+      }
+    }
+  }
+}

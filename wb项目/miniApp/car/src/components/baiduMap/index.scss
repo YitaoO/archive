@@ -1,0 +1,37 @@
+.index-map-container {
+  height: 100%;
+  .reload-btn {
+    position: fixed;
+    bottom: 100rpx;
+    right: 10rpx;
+    height: 120rpx;
+    width: 120rpx;
+    display: inline-block;
+  }
+  .header-btn {
+    position: fixed;
+    top: 20rpx;
+    left: 20rpx;
+    height: 120rpx;
+    width: 120rpx;
+    // background: url("../../images/index_header_icon.png") no-repeat;
+    // background-size: 100% 100%;
+    display: inline-block;
+  }
+  .btn {
+    position: fixed;
+    top: 20rpx;
+    left: 20rpx;
+    height: 120rpx;
+    width: 120rpx;
+    background-image: url("../../images/index_header_icon.png") no-repeat;
+    background-size: 100% 100%;
+    border: none;
+    opacity: 0;
+    display: inline-block;
+  }
+}
+button wx-cover-view {
+  width: 100% !important;
+  height: 100% !important;
+}

@@ -1,0 +1,4 @@
+<block>
+    <ec-canvas id="mychart-AlermEchart" __triggerObserer="{{ _triggerObserer }}"
+    canvas-id="mychart-AlermEchart" canvas-disable="{{false}}" ec="{{ec}}"></ec-canvas>
+</block>

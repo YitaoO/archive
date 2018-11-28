@@ -1,0 +1,27 @@
+<block>
+    <cover-view class="{{!!isShow ? 'menu-wrap open-trans' : 'menu-wrap transformHide'}}">
+        <cover-view class="menu-left">
+            <cover-view class="menu-header">
+                <block wx:if="{{!!weixinUserInfo.avatarUrl}}">
+                    <cover-view class="icon-wrap">
+                        <cover-image src="{{weixinUserInfo.avatarUrl}}" class="icon"></cover-image>
+                    </cover-view>
+                </block>
+                <cover-view class="right">
+                    <cover-view class="name">{{carUserInfo.Name}}</cover-view>
+                    <cover-view class="desp ">{{carUserInfo.OrgName}}{{anonymousState__temp}}</cover-view>
+                </cover-view>
+                <cover-view class="btn-loginout" bindtap="handleOut">解绑</cover-view>
+            </cover-view>
+            <cover-view class="nav-list">
+                <cover-view class="{{item.$loopState__temp3}}" wx:key="{{item.$$original.id}}"
+                bindtap="handleMenuTab" wx:for="{{loopArray0}}" wx:for-item="item" wx:for-index="index"
+                data-e-handleMenuTab-so="this" data-e-handleMenuTab-a-a="{{item.$$original}}">
+                    <cover-image src="{{item.$$original.iconPath}}" class="image"></cover-image>
+                    <cover-view class="title">{{item.$$original.title}}</cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="mask" bindtap="handleMenu"></cover-view>
+    </cover-view>
+</block>

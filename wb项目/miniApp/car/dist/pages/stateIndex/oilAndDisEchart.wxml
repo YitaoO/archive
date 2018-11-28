@@ -1,0 +1,4 @@
+<block>
+    <ec-canvas id="mychart-OilAndDisEchart" __triggerObserer="{{ _triggerObserer }}"
+    canvas-id="mychart-OilAndDisEchart" canvas-disable="{{false}}" ec="{{ec}}"></ec-canvas>
+</block>

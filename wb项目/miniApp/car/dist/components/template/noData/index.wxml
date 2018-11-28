@@ -1,0 +1,5 @@
+<block>
+    <view class="nodata-wrap">
+        <view class="item">暂无数据...</view>
+    </view>
+</block>

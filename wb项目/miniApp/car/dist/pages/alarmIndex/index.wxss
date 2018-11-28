@@ -1,0 +1,52 @@
+
+.alarm-index {
+  padding: 30rpx 30rpx 15rpx 30rpx; }
+  .alarm-index .item {
+    position: relative;
+    margin-bottom: 15rpx;
+    background: #fff; }
+    .alarm-index .item .top-title {
+      font-size: 25rpx;
+      color: #666;
+      line-height: 75rpx;
+      padding-left: 25rpx;
+      border-bottom: 1rpx solid #dddd; }
+    .alarm-index .item .childWrap {
+      border-bottom: 1rpx solid #dddd; }
+    .alarm-index .item .center {
+      position: relative;
+      padding: 25rpx 25rpx 10rpx 25rpx; }
+      .alarm-index .item .center .title {
+        font-size: 35rpx;
+        color: #333;
+        line-height: 75rpx; }
+      .alarm-index .item .center .car-name {
+        font-size: 35rpx;
+        color: #333; }
+      .alarm-index .item .center .box {
+        color: #333; }
+        .alarm-index .item .center .box .title {
+          font-size: 24rpx;
+          color: #666; }
+        .alarm-index .item .center .box .value {
+          font-size: 28rpx;
+          color: #333; }
+      .alarm-index .item .center .wran-btn {
+        position: absolute;
+        right: 30rpx;
+        top: 40rpx;
+        font-size: 21rpx;
+        padding: 10rpx;
+        border-radius: 3rpx; }
+        .alarm-index .item .center .wran-btn.type1 {
+          color: #f56c6c;
+          background-color: #fef0f0;
+          border: solid 0 #f56c6c; }
+        .alarm-index .item .center .wran-btn.type2 {
+          color: #409eff;
+          background-color: #ecf5ff;
+          border: solid 0 #94c6fb; }
+        .alarm-index .item .center .wran-btn.type3 {
+          color: #e6a23c;
+          background-color: #fbf4ea;
+          border: solid 0 #f8d7a2; }

@@ -1,0 +1,81 @@
+<block>
+    <scroll-view class="search-wrap" scroll-y="{{true}}" scroll-with-animation="{{true}}"
+    bindscrolltolower="onScrolltolower" bindscroll="onScroll">
+        <search-component bindonclick="handleSearch" __triggerObserer="{{ _triggerObserer }}"
+        __fn_onClick="{{true}}"></search-component>
+        <view class="state-index-wrap">
+            <view class="item" wx:key="{{item.$$original.index}}" style="{{item.$loopState__temp2}}"
+            wx:for="{{loopArray0}}" wx:for-item="item">
+                <view class="item-top">
+                    <view class="line"><span __triggerObserer="{{ _triggerObserer }}"></span>
+                    </view>
+                    <view class="title">{{item.$$original.name}}</view>
+                    <view class="right" bindtap="handlePackUp"
+                    data-e-handlePackUp-so="this" data-e-handlePackUp-a-a="{{item.$$original}}">{{!!item.$$original.isUp ? "收起" : "展开"}}</view>
+                </view>
+                <view class="{{item.$loopState__temp4}}" style="{{item.$loopState__temp6}}">
+                    <block wx:if="{{item.$$original.index == 0}}">
+                        <block>
+                            <block wx:if="{{UseEffic.length == 0}}">
+                                <no-data __triggerObserer="{{ _triggerObserer }}"></no-data>
+                            </block>
+                            <block wx:else>
+                                <user-effic-echart __triggerObserer="{{ _triggerObserer }}"></user-effic-echart>
+                            </block>
+                        </block>
+                    </block>
+                    <block wx:if="{{item.$$original.index == 1}}">
+                        <block>
+                            <block wx:if="{{WarningReports.length == 0}}">
+                                <no-data __triggerObserer="{{ _triggerObserer }}"></no-data>
+                            </block>
+                            <block wx:else>
+                                <water-echart __triggerObserer="{{ _triggerObserer }}"></water-echart>
+                            </block>
+                        </block>
+                    </block>
+                    <block wx:if="{{item.$$original.index == 2}}">
+                        <block>
+                            <block wx:if="{{WarningReports.length == 0}}">
+                                <no-data __triggerObserer="{{ _triggerObserer }}"></no-data>
+                            </block>
+                            <block wx:else>
+                                <oil-and-dis-echart __triggerObserer="{{ _triggerObserer }}"></oil-and-dis-echart>
+                            </block>
+                        </block>
+                    </block>
+                    <block wx:if="{{item.$$original.index == 5}}">
+                        <block>
+                            <block wx:if="{{WarningReports.length == 0}}">
+                                <no-data __triggerObserer="{{ _triggerObserer }}"></no-data>
+                            </block>
+                            <block wx:else>
+                                <oil-price-echart __triggerObserer="{{ _triggerObserer }}"></oil-price-echart>
+                            </block>
+                        </block>
+                    </block>
+                    <block wx:if="{{item.$$original.index == 3}}">
+                        <block>
+                            <block wx:if="{{FuelPerOneHunKm.length == 0}}">
+                                <no-data __triggerObserer="{{ _triggerObserer }}"></no-data>
+                            </block>
+                            <block wx:else>
+                                <hundred-echart __triggerObserer="{{ _triggerObserer }}"></hundred-echart>
+                            </block>
+                        </block>
+                    </block>
+                    <block wx:if="{{item.$$original.index == 4}}">
+                        <block>
+                            <block wx:if="{{WarningReports.length == 0}}">
+                                <no-data __triggerObserer="{{ _triggerObserer }}"></no-data>
+                            </block>
+                            <block wx:else>
+                                <alerm-echart __triggerObserer="{{ _triggerObserer }}"></alerm-echart>
+                            </block>
+                        </block>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</block>

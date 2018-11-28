@@ -1,0 +1,29 @@
+<block>
+    <view class="res-wrap">
+        <view class="wrap-center">
+            <view class="item grid-list">
+                <view class="icon-wrap grid-list-item">
+                    <view class="icon id"></view>
+                </view>
+                <view class="grid-list-item input-wrap">
+                    <input class="input" placeholder-style="color:#999" placeholder="请输入用户ID"
+                    type="number" maxlength="8" bindinput="inputPhoneChange" value="{{userId}}"
+                    />
+                </view>
+            </view>
+            <view class="item grid-list">
+                <view class="icon-wrap grid-list-item">
+                    <view class="icon phone"></view>
+                </view>
+                <view class="grid-list-item input-wrap">
+                    <input class="input" placeholder-style="color:#999" placeholder="请输入密码"
+                    type="password" bindinput="inputPassChange" value="{{password}}" />
+                </view>
+            </view>
+        </view>
+        <view class="btn-wrap">
+            <button type="primary" size="default" open-type="getUserInfo" lang="zh_CN"
+            bindgetuserinfo="handleRes">注册</button>
+        </view>
+    </view>
+</block>

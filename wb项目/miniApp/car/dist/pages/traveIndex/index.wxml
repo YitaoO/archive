@@ -1,0 +1,51 @@
+<block>
+    <view class="travel-index">
+        <view class="item" wx:key="{{item.$$original.carId}}" wx:for="{{loopArray0}}"
+        wx:for-item="item">
+            <view class="top-title">{{item.$$original.projSubName}}</view>
+            <view class="childWrap" wx:key="{{childItem.$$original.simno}}"
+            bindtap="handleToDetail" wx:for="{{item.$anonymousCallee__1}}" wx:for-item="childItem"
+            data-e-handleToDetail-so="this" data-e-handleToDetail-a-a="{{childItem.$$original}}">
+                <view class="center">
+                    <view class="title">{{childItem.$$original.carNumber}}</view>
+                    <view class="box">
+                        <view class="box-left">
+                            <view class="name">点火时长</view>
+                            <view class="value">{{childItem.$loopState__temp2}}</view>
+                        </view>
+                        <view class="box-right">
+                            <view class="name">行驶时长</view>
+                            <view class="value">{{childItem.$loopState__temp4}}</view>
+                        </view>
+                    </view>
+                    <view class="box">
+                        <view class="box-left">
+                            <view class="name">行驶里程</view>
+                            <view class="value">{{childItem.$loopState__temp6}} km</view>
+                        </view>
+                        <view class="box-right">
+                            <view class="name">平均速度</view>
+                            <view class="value">{{childItem.$loopState__temp8}}{{" "}} km/h</view>
+                        </view>
+                    </view>
+                    <view class="box">
+                        <view class="box-left">
+                            <view class="name">车时利用率</view>
+                            <view class="value">{{childItem.$loopState__temp10}} %</view>
+                        </view>
+                        <view class="box-right">
+                            <view class="name">使用率</view>
+                            <view class="value">{{childItem.$loopState__temp12}}{{" "}} %</view>
+                        </view>
+                    </view>
+                </view>
+                <block wx:if="{{childItem.$$original.runMinuter != 0}}">
+                    <view class="item-button">
+                        <text class="btn-name">详情</text>
+                        <image class="image" src="{{Arrow}}" />
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</block>

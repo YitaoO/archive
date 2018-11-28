@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "search-component": "../../components/search/index",
+    "no-data": "../../components/template/noData/index",
+    "user-effic-echart": "./useEfficEchart",
+    "water-echart": "./waterEchart",
+    "oil-and-dis-echart": "./oilAndDisEchart",
+    "oil-price-echart": "./oilPrice",
+    "hundred-echart": "./hundredEchart",
+    "alerm-echart": "./alermEchart"
+  }
+}

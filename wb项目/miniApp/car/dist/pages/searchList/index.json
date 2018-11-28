@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "search-component": "../../components/search/index",
+    "history-index": "../../pages/historyIndex/index",
+    "travel-index": "../../pages/traveIndex/index",
+    "alarm-index": "../../pages/alarmIndex/index",
+    "oil-and-water-index": "../../pages/oilAndWaterIndex/index"
+  }
+}

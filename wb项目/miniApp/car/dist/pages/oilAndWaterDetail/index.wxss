@@ -1,0 +1,17 @@
+
+.oil-water-detail-wrap {
+  height: 100%; }
+  .oil-water-detail-wrap .detail-top {
+    padding: 50rpx; }
+    .oil-water-detail-wrap .detail-top .name {
+      color: #333;
+      font-size: 36rpx;
+      padding-bottom: 10rpx; }
+    .oil-water-detail-wrap .detail-top .number {
+      font-size: 26rpx;
+      color: #666; }
+    .oil-water-detail-wrap .detail-top .time {
+      text-align: center;
+      color: #333;
+      font-size: 26rpx;
+      padding-top: 70rpx; }

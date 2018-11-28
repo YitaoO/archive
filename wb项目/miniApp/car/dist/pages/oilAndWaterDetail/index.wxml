@@ -1,0 +1,11 @@
+<block>
+    <view class="oil-water-detail-wrap">
+        <view class="detail-top">
+            <view class="name">{{carName}}</view>
+            <view class="number">车牌号： {{carNumber}}</view>
+            <view class="time">{{bdate}} 至 {{edate}}</view>
+        </view>
+        <ec-canvas id="mychart-dom-area" __triggerObserer="{{ _triggerObserer }}"
+        canvas-id="mychart-area" canvas-disable="{{true}}" ec="{{ec}}"></ec-canvas>
+    </view>
+</block>

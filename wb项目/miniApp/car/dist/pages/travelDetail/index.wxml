@@ -1,0 +1,57 @@
+<block>
+    <scroll-view class="travel-detail-wrap" scroll-y="{{true}}" scroll-with-animation="{{true}}"
+    bindscrolltolower="onScrolltolower">
+        <view class="lists">
+            <view class="item" wx:key="{{item.$$original.carId}}" bindtap="handleToDetail"
+            wx:for="{{loopArray0}}" wx:for-item="item" data-e-handleToDetail-so="this"
+            data-e-handleToDetail-a-a="{{item.$$original}}">
+                <view class="center">
+                    <view class="box">
+                        <view class="box-left">
+                            <view class="name">开始时间</view>
+                            <view class="value">{{item.$loopState__temp2}}</view>
+                        </view>
+                        <view class="box-right">
+                            <view class="name">结束时间</view>
+                            <view class="value">{{item.$loopState__temp4}}</view>
+                        </view>
+                    </view>
+                    <view class="box">
+                        <view class="box-left">
+                            <view class="name">点火时长</view>
+                            <view class="value">{{item.$loopState__temp6}}</view>
+                        </view>
+                        <view class="box-right">
+                            <view class="name">行驶时长</view>
+                            <view class="value">{{item.$loopState__temp8}}</view>
+                        </view>
+                    </view>
+                    <view class="box">
+                        <view class="box-left">
+                            <view class="name">行驶里程</view>
+                            <view class="value">{{item.$loopState__temp10}} km</view>
+                        </view>
+                        <view class="box-right">
+                            <view class="name">平均速度</view>
+                            <view class="value">{{item.$loopState__temp12}} km/h</view>
+                        </view>
+                    </view>
+                </view>
+                <block wx:if="{{item.$$original.runDistance != 0}}">
+                    <view class="item-button">
+                        <text class="btn-name">详情</text>
+                        <image class="image" src="{{Arrow}}" />
+                    </view>
+                </block>
+            </view>
+        </view>
+        <block wx:if="{{!!loading}}">
+            <view class="footer">加载数据中...
+                <image src="{{loadingIcon}}" class="image" />
+            </view>
+        </block>
+        <block wx:if="{{!!noData}}">
+            <view class="footer">没有更多数据了...</view>
+        </block>
+    </scroll-view>
+</block>

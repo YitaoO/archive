@@ -1,0 +1,61 @@
+.state-index-wrap {
+  height: 100%;
+  .item {
+    background: #fff;
+    margin-bottom: 15px;
+    padding: 30px 20px;
+
+    .item-top {
+      position: relative;
+      display: flex;
+      padding-bottom: 30px;
+      .line {
+        flex: 0 0 20px;
+        span {
+          display: inline-block;
+          width: 5px;
+          height: 35px;
+          background-color: #58bdf2;
+        }
+      }
+      .title {
+        flex: 1;
+        color: #333;
+        font-size: 30px;
+        color: #333;
+      }
+      .right {
+        flex: 0 0 80px;
+        padding-left: 10px;
+        text-align: right;
+        color: #58bdf2;
+        font-size: 24px;
+        padding-right: 20px;
+      }
+    }
+    .item-echart {
+      // height: 600px;
+    }
+  }
+}
+.echart-wrap {
+  // height: 800px;
+  height: 100%;
+  position: relative;
+  .no-date {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 30px;
+    text-align: center;
+
+    font-size: 30px;
+    color: #909399;
+  }
+}
+Page {
+  height: auto;
+}

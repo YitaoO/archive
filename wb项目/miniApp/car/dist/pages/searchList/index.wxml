@@ -1,0 +1,27 @@
+<block>
+    <scroll-view class="search-wrap" scroll-y="{{true}}" scroll-with-animation="{{true}}"
+    bindscrolltolower="onScrolltolower" bindscroll="onScroll">
+        <search-component bindonclick="handleSearch" __triggerObserer="{{ _triggerObserer }}"
+        __fn_onClick="{{true}}"></search-component>
+        <block wx:if="{{menuChoice.index == 1}}">
+            <history-index __triggerObserer="{{ _triggerObserer }}"></history-index>
+        </block>
+        <block wx:if="{{menuChoice.index == 2}}">
+            <travel-index __triggerObserer="{{ _triggerObserer }}"></travel-index>
+        </block>
+        <block wx:if="{{menuChoice.index == 3}}">
+            <alarm-index __triggerObserer="{{ _triggerObserer }}"></alarm-index>
+        </block>
+        <block wx:if="{{menuChoice.index == 4 || menuChoice.index == 5}}">
+            <oil-and-water-index type="{{menuChoice.index}}" __triggerObserer="{{ _triggerObserer }}"></oil-and-water-index>
+        </block>
+        <block wx:if="{{!!loading}}">
+            <view class="footer">加载数据中...
+                <image src="{{loadingIcon}}" class="image" />
+            </view>
+        </block>
+        <block wx:if="{{!!noData}}">
+            <view class="footer">没有更多数据了...</view>
+        </block>
+    </scroll-view>
+</block>

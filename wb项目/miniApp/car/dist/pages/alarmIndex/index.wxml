@@ -1,0 +1,30 @@
+<block>
+    <view class="alarm-index">
+        <view class="item" wx:key="{{item.$$original.simno}}" wx:for="{{loopArray0}}"
+        wx:for-item="item">
+            <view class="top-title">{{item.$$original.projSubName}}</view>
+            <view class="childWrap" wx:key="{{childItem.$$original.simno}}"
+            wx:for="{{item.$anonymousCallee__2}}" wx:for-item="childItem">
+                <view class="center">
+                    <text class="{{childItem.$loopState__temp2}}">{{childItem.$$original.warnningType == 1 ? "出围栏" : childItem.$$original.warnningType
+                        == 2 ? "进围栏" : "油位异常"}}</text>
+                    <view class="box">
+                        <view class="car-name">{{childItem.$$original.carNumber}}</view>
+                    </view>
+                    <view class="box">
+                        <text class="title">微信通知</text>
+                        <view class="value">{{childItem.$$original.isNotice == 0 ? "未发送" : "已发送"}}</view>
+                    </view>
+                    <view class="box">
+                        <text class="title">通知结果</text>
+                        <view class="value">{{childItem.$$original.noticeUserName}}</view>
+                    </view>
+                    <view class="box">
+                        <text class="title">告警详情</text>
+                        <view class="value">{{childItem.$$original.warnningMsg}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</block>

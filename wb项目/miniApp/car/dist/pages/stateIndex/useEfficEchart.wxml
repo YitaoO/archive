@@ -1,0 +1,4 @@
+<block>
+    <ec-canvas id="mychart-UseEfficEchart" __triggerObserer="{{ _triggerObserer }}"
+    canvas-id="mychart-UseEfficEchart" canvas-disable="{{false}}" ec="{{ec}}"></ec-canvas>
+</block>

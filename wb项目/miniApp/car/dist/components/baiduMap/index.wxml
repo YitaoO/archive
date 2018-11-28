@@ -1,0 +1,16 @@
+<block>
+    <view class="index-map-container">
+        <map id="myMap1" latitude="23.099994" longitude="113.344520" include-points="{{carStateList}}"
+        markers="{{carStateList}}" bindmarkertap="handleMakertap" bindtap="handleMap"
+        style="width: 100%; height: 100%;">
+            <cover-image class="reload-btn" src="{{reloadIcon}}" bindtap="handleReloadBtn"></cover-image>
+            <cover-image class="header-btn " src="{{headerIcon}}"></cover-image>
+            <button class="btn" plain="true" open-type="getUserInfo"
+            lang="zh_CN" bindgetuserinfo="handleMenu"></button>
+            <marker-info-window __triggerObserer="{{ _triggerObserer }}"></marker-info-window>
+            <block wx:if="{{!!isShow}}">
+                <sider-menu __triggerObserer="{{ _triggerObserer }}"></sider-menu>
+            </block>
+        </map>
+    </view>
+</block>

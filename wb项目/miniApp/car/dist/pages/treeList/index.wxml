@@ -1,0 +1,44 @@
+<block>
+    <view class="choiceCar-wrap">
+        <view class="item" wx:key="{{item.$$original.id}}" wx:for="{{loopArray0}}"
+        wx:for-item="item">
+            <view wx:key="{{item.$$original.id}}" class="father-wrap">
+                <view class="arrow-wrap" bindtap="handleArrow" data-e-handleArrow-so="this"
+                data-e-handleArrow-a-a="{{item.$$original}}">
+                    <image class="image-arrow" src="{{!!item.$$original.isShow ? ArrowUpIcon : ArrowDownIcon}}"
+                    />
+                </view>
+                <block wx:if="{{!!isMultiSelect}}">
+                    <view class="check-wrap">
+                        <image class="check-icon" bindtap="handlePathter" src="{{item.$loopState__temp2}}"
+                        data-e-handlePathter-so="this" data-e-handlePathter-a-a="{{item.$$original}}"
+                        />
+                    </view>
+                </block>
+                <view class="{{item.$loopState__temp4}}" bindtap="handlePathter" data-e-handlePathter-so="this"
+                data-e-handlePathter-a-a="{{item.$$original}}">{{item.$$original.text}}</view>
+            </view>
+            <view class="child-wrap">
+                <view wx:key="{{childItem.$$original.id}}" wx:for="{{item.$anonymousCallee__0}}"
+                wx:for-item="childItem">
+                    <block wx:if="{{childItem.$$original.isShow}}">
+                        <view class="wrap">
+                            <view wx:key="{{childItem.$$original.id}}" class="child-item" bindtap="handleChildren"
+                            data-e-handleChildren-so="this" data-e-handleChildren-a-a="{{childItem.$$original}}">
+                                <block wx:if="{{!!isMultiSelect}}">
+                                    <view class="check-wrap">
+                                        <image class="check-icon" src="{{childItem.$loopState__temp6}}" />
+                                    </view>
+                                </block>
+                                <view class="wrap-name">{{" "}}
+                                    <text>{{childItem.$$original.text}}</text>{{" "}}
+                                    <text>{{childItem.$$original.desText}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+</block>

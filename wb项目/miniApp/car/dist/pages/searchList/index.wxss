@@ -1,0 +1,15 @@
+
+.search-wrap {
+  height: 100%; }
+  .search-wrap .lists {
+    padding: 30rpx; }
+  .search-wrap .footer {
+    font-size: 30rpx;
+    text-align: center;
+    padding-bottom: 15rpx; }
+    .search-wrap .footer .image {
+      display: inline-block;
+      width: 40rpx;
+      height: 40rpx;
+      vertical-align: top;
+      margin-left: 10rpx; }

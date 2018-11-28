@@ -1,0 +1,15 @@
+
+.nodata-wrap {
+  height: 560rpx;
+  position: relative; }
+  .nodata-wrap .item {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 30rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #909399; }
