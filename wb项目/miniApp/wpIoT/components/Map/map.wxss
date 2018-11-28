@@ -1,0 +1,21 @@
+Page{
+  height: 100%;
+}
+.map_container{
+  height: 100%;
+  width: 100%;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.place_info {
+  margin: 15px;
+}
+
+.place_info text{
+  display: inline-block;
+  margin-bottom: 10px;
+}

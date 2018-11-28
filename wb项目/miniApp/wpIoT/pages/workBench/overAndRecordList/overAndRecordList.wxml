@@ -1,0 +1,57 @@
+<!-- 引用通用模版 -->
+<import src='../../../components/template/common/common.wxml'/>
+<template is="noNetwork" data="{{showNoNetwork}}"></template>
+<template is="noDate" data="{{list}}"></template>
+
+
+
+<view >
+    <!-- 搜索头部 -->
+    <include src="../../../components/Search/search.wxml" wx:if="{{!tabShow}}" />
+    <!-- tab头部 -->
+    <view class="inspe-header" wx:if="{{!!tabShow}}">
+      <scroll-view scroll-x class="inspe-top" style="{{type == '1'?'width:80%':''}}">
+        <view wx:for="{{tabs}}" wx:key="tabs" data-areaid="{{item.areaId}}"  data-tabnum="{{index}}" class="{{index==checkNum?'navigator-hover':''}}" bindtap="tabChecked" style="display:inline-block;padding-right: 10px;">{{item.areaName}}</view>
+      </scroll-view>
+      <view class="inspe-right inspe-search" wx:if="{{type == '0'}}" bindtap="bindSearch">
+        <image bind:tap="" style="width:7vh;height:4vh"   src="../../../img/searsh.png" mode="aspectFit"></image>
+      </view>
+      <view class="inspe-right inspe-filter {{!filter?'primary-color-02':'primary-color'}}" wx:if="{{type == '1'}}"  bindtap="bindFilter">
+        <image bind:tap="" style="width:7vh;height:4vh" src="{{!filter?'../../../img/over_filter_unchoice_icon.png':'../../../img/over_filter_choice_icon.png'}}" mode="aspectFit"></image>
+        <!-- 延保\n设备 -->
+        <view class="filter-text text-top">过保</view>
+        <view class="filter-text text-bottom">设备</view>
+      </view>
+      <!-- <view class="over-right" wx:if="{{type == '1'}}" bindtap="toOverPublishView">
+        延保
+      </view> -->
+    </view>
+
+    <view class="inspe-content ">
+      <view class="item record-item grid-list border-bottom" wx:if="{{type == '0'}}"  bindtap="toInspeminfoView" data-kid="{{item.kid}}" wx:for="{{list}}" wx:key="list">
+        <view class="item-conter grid-list-item">
+          <image class="item-img" src="{{item.picturePath != null?item.picturePath:'../../../img/kongtiao.png'}}" mode="aspectFit"></image>
+        </view>
+        <view class="item-bot grid-list-item">
+          <view class="item-title">{{item.devName}}</view>
+          <view class="oneLine" style="width:400rpx;" wx:if="{{item.description !=null}}">{{item.description}}</view>
+          <view>{{item.addDate}}</view>
+        </view>
+     </view>
+
+     <view class="item over-item grid-list border-bottom" wx:if="{{type == '1'}}" id="{{index}}" wx:key="{{item}}"  bindtap="bindChecked" wx:for="{{list}}" wx:key="list">
+       <view class="item-choice grid-list-item">
+         <image class="choice-img" src="{{!!item.isChecked?'../../../img/over_btn_choiced.png':'../../../img/over_btn_unchoice.png'}}" mode="aspectFit"></image>
+       </view>
+       <view class="item-conter grid-list-item">
+         <image class="item-img" src="{{item.picturePath != null?item.picturePath:'../../../img/kongtiao.png'}}" mode="aspectFit"></image>
+       </view>
+       <view class="item-bot grid-list-item">
+         <view class="item-title">{{item.areaName}}</view>
+         <view class="">{{item.devName}}</view>
+         <view wx:if="{{item.maintainTerm !=null}}">{{type == '1'?'维保期限:':''}}{{item.maintainTerm}}</view>
+       </view>
+    </view>
+    </view>
+</view>
+<view class="float-btn" bindtap="toOverPublishView" wx:if="{{type == 1}}">延保</view>

@@ -1,0 +1,14 @@
+
+
+map{
+  width: 100%;
+  height: 100%;
+}
+.place_info {
+  margin: 15px;
+}
+
+.place_info text{
+  display: inline-block;
+  margin-bottom: 10px;
+}

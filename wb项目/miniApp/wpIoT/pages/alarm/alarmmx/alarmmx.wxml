@@ -1,0 +1,53 @@
+<view >
+    <view class="alarmmx-top clearfix">
+       <view style="float:left;">
+            <image style="height:4vh;width:4vh;vertical-align:middle;" src="../../../../img/gaojingbiaoshi-v.png" mode="scaleToFill" binderror="" bindload=""></image>
+                {{warnLevel}}
+        </view>
+        <view style="float:right;">{{end == false?'未结束':'已结束'}}</view>
+    </view>
+    <view style="margin-top:10px;">
+        <view class="alarmmx-conter border-bottom">
+            <view class="clearfix">
+                <view class="alarmmx-left">设备</view>
+                <view class="alarmmx-right-down">{{devName}} 　{{typeWarnName}}</view>
+            </view>
+        </view>
+        <view class="alarmmx-conter border-bottom">
+            <view class="clearfix">
+                <view class="alarmmx-left">位置</view>
+                <view class="alarmmx-right">{{location}}</view>
+            </view>
+        </view>
+        <view class="alarmmx-conter border-bottom">
+            <view class="clearfix">
+                <view class="alarmmx-left">产生时间</view>
+                <view class="alarmmx-right">{{warnDt}}</view>
+            </view>
+        </view>
+        <view class="alarmmx-conter border-bottom">
+            <view class="clearfix">
+                <view class="alarmmx-left">设备类型</view>
+                <view class="alarmmx-right">{{deviceTypeName}}</view>
+            </view>
+        </view>
+        <view wx:if="{{end}}" class="alarmmx-conter border-bottom">
+            <view class="clearfix">
+                <view class="alarmmx-left">解除时间</view>
+                <view class="alarmmx-right">{{endDate}}</view>
+            </view>
+        </view>
+        <view wx:if="{{end}}" class="alarmmx-conter border-bottom">
+            <view class="clearfix">
+                <view class="alarmmx-left">解除人</view>
+                <view class="alarmmx-right">{{userName}}</view>
+            </view>
+        </view>
+    </view>
+    <!-- <view class="alarmmxmx-footer">
+        <textarea bindblur="bindTextarea" placeholder="填写报告处理结果..." auto-focus  />
+    </view> -->
+    <!-- <view class="btn">
+        <button style="background-color:#16BB99" type="primary" bindtap="primary"> 结束 </button>
+    </view> -->
+</view>

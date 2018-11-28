@@ -1,0 +1,91 @@
+
+.view-item{
+  /* height:300rpx; */
+  padding:28rpx 21rpx;
+  width: 50%;
+  display: inline-block;
+  border-right: 1px solid #f2f2f2;
+  border-bottom:1px solid #f2f2f2;
+  float: left;
+}
+.view-item:first-child{
+    /* margin-top:20rpx; */
+}
+
+.item-top{
+  margin-bottom: 8rpx;
+}
+.item-conter-wrap{
+  position: relative;
+  height:186rpx;
+  box-sizing: border-box;
+  background-color:#17B990;
+
+}
+.item-conter{
+  padding: 5%;
+  height:100%;
+
+}
+.item-conter-wrap .conter-image{
+  width:100%;
+  height:100%;
+}
+.item-conter-wrap image{
+  /* position: absolute; */
+  top:0;
+  width:100%;
+  height:100%;
+}
+.item-conter-stu01{
+  /* background-color:#17B990; */
+}
+.item-contert-statu-no01{
+  opacity: .5;
+  background: #0b5c48;
+}
+.item-conter .devThree .type-tem-title{
+  padding-left:7rpx;
+}
+.item-conter .devOne{
+  text-align: left;
+}
+/* ------------------------------------------------------------
+   精密空调
+------------------------------------------------------------ */
+.devOne .type-tem-num{
+   font-size:35rpx;
+}
+.devOne .type-tem-title{
+font-size:20rpx;
+padding-bottom:4rpx;
+
+}
+.devOne .type-hum-num{
+font-size:35rpx;
+}
+.devOne .type-hum-title{
+font-size:20rpx;
+}
+/* ------------------------------------------------------------
+   中央空调
+------------------------------------------------------------ */
+.devThree .type-tem-num{
+  /* font-weight: 100; */
+   font-size:65rpx;
+}
+.devThree .type-tem-title{
+  font-size:25rpx;
+}
+
+
+
+.item-conter .item-left{
+  width: 50%;
+}
+
+.item-conter .item-right{
+  opacity: .5;
+  padding-left:5rpx;
+
+}

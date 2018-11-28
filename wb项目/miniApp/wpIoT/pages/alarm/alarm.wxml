@@ -1,0 +1,35 @@
+<!-- 引用通用模版 -->
+<import src='../../components/template/common/common.wxml'/>
+<template is="noNetwork" data="{{showNoNetwork}}"></template>
+<template is="noDate" data="{{list}}"></template>
+
+<view>
+    <view class="alarm-top">
+        <view class="{{isEnd == 0?'navigator-hover':''}}"   bindtap="bindTab" style="display:inline-block;" data-tab="0">实时告警</view>
+        <view style="width:20%;display:inline-block;"></view>
+        <view class="{{isEnd == 1?'navigator-hover':''}}"  bindtap="bindTab" style="display:inline-block;" data-tab="1">历史告警</view>
+    </view>
+    <view class="list-wrap">
+    <view wx:for="{{list}}" wx:key="{{list}}" data-kid="{{item.kid}}" bind:tap="details" class="alarm-conter">
+        <view class="clearfix">
+            <view style="float:left;font-size:14px;color:#ccc">
+                <image style="height:4vh;width:4vh;vertical-align:middle;" src="{{isEnd ==0?'../../img/gaojingbiaoshi-v.png':'../../img/gaojingbiaoshi.png'}}" mode="scaleToFill" binderror="" bindload=""></image>
+                {{item.warnLevel}}
+            </view>
+            <view style="float:right;"><image style="height:4vh;width:10vh;vertical-align:middle;" src="{{isEnd ==0?'../../img/weijieshu.png':'../../img/yijieshu.png'}}" mode="scaleToFill"></image></view>
+        </view>
+        <view style="padding-left:60rpx;padding-top:16rpx"><text>{{item.deviceTypeName}}　{{item.content}}</text></view>
+        <view class="xinxi">
+            <view style="width:35%;display:inline-block;color:#666;">
+                <image style="height:3vh;width:3vh;vertical-align:middle;" src="../../img/weizhi.png" mode="scaleToFill" binderror="" bindload=""></image>
+                深圳数据中心
+            </view>
+            <view style="width:10%;display:inline-block;"></view>
+            <view style="width:50%;display:inline-block;color:#666;">
+                <image style="height:3vh;width:3vh;vertical-align:middle;" src="../../img/shizhong.png" mode="scaleToFill" binderror="" bindload=""></image>
+                {{item.warnDt}}
+            </view>
+        </view>
+    </view>
+    </view>
+</view>

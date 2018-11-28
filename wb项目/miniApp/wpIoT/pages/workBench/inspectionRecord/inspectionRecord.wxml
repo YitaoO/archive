@@ -1,0 +1,25 @@
+<!-- 引用通用模版 -->
+<import src='../../../components/template/common/common.wxml'/>
+<template is="noNetwork" data="{{showNoNetwork}}"></template>
+<template is="noDate" data="{{list}}"></template>
+
+<view style="height:100%;background:#f2f2f2">
+    <view class="inspe-header">
+      <scroll-view scroll-x class="inspe-top">
+        <view wx:for="{{tabs}}" wx:key="list"  data-tabnum="{{index}}" class="{{index==checkNum?'navigator-hover':''}}" bindtap="isChecked" style="display:inline-block;padding-right: 10px;">{{item.areaName}}</view>
+    </scroll-view>
+    <view class="inspe-right">
+      <image bind:tap="" style="width:7vh;height:4vh" src="../../../img/searsh.png" mode="aspectFit"></image>
+    </view>
+    </view>
+    <view class="itme" bind:tap="inspemx" wx:for="{{list}}" wx:key="list">
+      <view class="itme-conter">
+        <image class="itme-img" src="../../../img/kongtiao.png" mode="aspectFit"></image>
+      </view>
+      <view class="itme-bot">
+        <view class="itme-title">{{item.devName}}</view>
+        <view>运行异常</view>
+        <view>2017-01-01 23:53:22</view>
+      </view>
+    </view>
+</view>

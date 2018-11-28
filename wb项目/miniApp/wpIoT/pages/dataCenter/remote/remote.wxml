@@ -1,0 +1,155 @@
+<!-- 引用通用模版 -->
+<import src='../../../components/template/common/common.wxml' />
+<template is="noNetwork" data="{{showNoNetwork}}"></template>
+<!-- 关机 -->
+<view wx:if="{{status ==2}}" class="status01-wrap centerLayout" bindtap="handleSwitch">
+  <image class="remote-img" src="../../../img/remote_statu2_icon.png" mode="scaleToFill"></image>
+  <view class="remote-title">开机</view>
+</view>
+<!-- 启动 -->
+<image class="deviceIcon" bindtap="toDeviceInfo" data-handleType="0" src="../../../img/remote_warm.png" mode="scaleToFill"></image>
+<!-- 精密空调 -->
+<view wx:if="{{devType == 1}}" class="remove-one primary-color-bg primary-color-white">
+  <view class="remote">
+    <view class="remote-top">
+      <view class="remote-dushu">{{intoTem}}℃</view>
+      <view>当前温度</view>
+      <view></view>
+    </view>
+    <view class="remote-top">
+      <view class="remote-dushu">{{intoHum}}%</view>
+      <view>当前湿度</view>
+    </view>
+  </view>
+  <view class="remote-center">
+    <view class="center-top">
+      <view class="remote-left">
+        <view>{{modelType == 0?'回风':'送风'}}</view>
+        <view>风机转速{{windSpeedType}}%</view>
+      </view>
+      <view class="remote-right">
+        <image class="remote-img" bindtap="handleSwitch" src="../../../img/guanji.png" mode="scaleToFill"></image>
+        <view>关机</view>
+      </view>
+    </view>
+    <view>
+      <view class="common-middle">
+        <view class="remote-sd">
+          <view class="sd-centerdushu">{{template}}°\n</view>
+          <view class="sd-wendu">设定温度</view>
+        </view>
+        <image bindtap="handleTemplate" data-handleType="0" class="img-left icon" src="../../../img/wendujian.png" mode="scaleToFill"></image>
+        <image bindtap="handleTemplate" data-handleType="1" class="img-right icon" src="../../../img/wendujia.png" mode="scaleToFill"></image>
+        <image class="remote-wendu" src="../../../img/wenduhuan.png" mode="scaleToFill"></image>
+        <view class="remote-image ">
+          <image wx:if="{{systemExplain[2] == '1'}}" class="" src="../../../img/zhileng.png" mode="scaleToFill"></image>
+          <image wx:if="{{systemExplain[3] == '1'}}" class="" style="" src="../../../img/remote_three_sys02.png" mode="scaleToFill"></image>
+          <image wx:if="{{systemExplain[4] == '1'}}" class="" src="../../../img/remote_three_sys03.png" mode="scaleToFill"></image>
+          <image wx:if="{{systemExplain[5] == '1'}}" class="" src="../../../img/chushi.png" mode="scaleToFill"></image>
+        </view>
+      </view>
+      <view class="remote-box">
+        <view class="remote-bottom">
+          <image class="img-shidu" bindtap="handleHum" data-handleType="0" src="../../../img/shidujian.png" mode="scaleToFill"></image>
+        </view>
+        <view class="remote-bottom">
+          <view class="remote-shidu">{{humidity}}%</view>
+          <view class="remote-sdshidu">设定湿度</view>
+        </view>
+        <view class="remote-bottom">
+          <image class="img-shidu" bindtap="handleHum" data-handleType="1" src="../../../img/shidujia.png" mode="scaleToFill"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 红外空调 -->
+<view wx:if="{{devType == 2}}" class="remove-two remove-three primary-color-bg primary-color-white">
+  <view class="three-top ">
+    <view class="common-middle">
+      <view class="remote-sd">
+        <!-- fewfews -->
+        <text class="sd-centerdushu">{{temperature}}°\n</text>
+        <text class="sd-wendu">设定温度</text>
+      </view>
+      <image bindtap="handleTemplate" data-handleType="0" class="img-left icon" src="../../../img/wendujian.png" mode="scaleToFill"></image>
+      <image bindtap="handleTemplate" data-handleType="1" class="img-right icon" src="../../../img/wendujia.png" mode="scaleToFill"></image>
+      <image class="remote-wendu" src="../../../img/wenduhuan.png" mode="scaleToFill"></image>
+    </view>
+    <view class="zhognyan-center grid-list ">
+      <view class="item grid-list-item" wx:for="{{deviceControls}}" wx:if="{{item.pstate==1}}">
+        <view>{{item.controlName}}</view>
+        <view>{{item.fcontrolName}}</view>
+      </view>
+      <view class="item grid-list-item">
+        <view>{{humidity}}%</view>
+        <view>湿度</view>
+      </view>
+    </view>
+  </view>
+  <view class="two-botton three-botton grid-list primary-color-03">
+    <view class="item grid-list-item" bindtap="handleSwitch">
+      <image bindtap="" class="img-left icon" src="../../../img/remove_switch_icon.png" mode="scaleToFill"></image>
+      <view>关机</view>
+    </view>
+    <view class="item grid-list-item" data-type="1" bindtap="infrBaseChange">
+      <image bindtap="" class="img-left icon" src="../../../img/remove_model_icon.png" mode="scaleToFill"></image>
+      <view>模式</view>
+    </view>
+    <view class="item grid-list-item" data-type="2" bindtap="infrBaseChange">
+      <image bindtap="" class="img-left icon" src="../../../img/remove_wind_icon.png" mode="scaleToFill"></image>
+      <view>风速</view>
+    </view>
+    <view class="item grid-list-item" data-type="3" bindtap="infrBaseChange">
+      <image bindtap="" class="img-left icon" src="../../../img/remove_wind_icon.png" mode="scaleToFill"></image>
+      <view>风向</view>
+    </view>
+  </view>
+</view>
+<!-- 中央空调 -->
+<view wx:if="{{devType == 3}}" class="remove-three primary-color-bg primary-color-white">
+  <view class="three-top ">
+    <view class="common-middle">
+      <view class="remote-sd">
+        <!-- fewfews -->
+        <text class="sd-centerdushu">{{template}}°\n</text>
+        <text class="sd-wendu">设定温度</text>
+      </view>
+      <image bindtap="handleTemplate" data-handleType="0" class="img-left icon" src="../../../img/wendujian.png" mode="scaleToFill"></image>
+      <image bindtap="handleTemplate" data-handleType="1" class="img-right icon" src="../../../img/wendujia.png" mode="scaleToFill"></image>
+      <image class="remote-wendu" src="../../../img/wenduhuan.png" mode="scaleToFill"></image>
+    </view>
+    <view class="zhognyan-center grid-list ">
+      <view class="item grid-list-item">
+        <view>{{intoTemperature}}°</view>
+        <view>室内温度</view>
+      </view>
+      <view class="item grid-list-item">
+        <view>
+          {{modelType == 0 ? '取暖' : modelType == 1 ? '制冷' : modelType == 2 ? '睡眠' : modelType == 3 ? '唤醒' : '关闭'}}
+        </view>
+        <view>模式</view>
+      </view>
+      <view class="item grid-list-item">
+        <view>
+          {{windSpeedType == 0 ? '低速' : windSpeedType == 1 ? '中速' : windSpeedType == 2 ? '高速' : windSpeedType == 3 ? '自动速度' : '关闭'}}
+        </view>
+        <view>风速</view>
+      </view>
+    </view>
+  </view>
+  <view class="three-botton grid-list primary-color-03">
+    <view class="item grid-list-item" bindtap="handleSwitch">
+      <image bindtap="" class="img-left icon" src="../../../img/remove_switch_icon.png" mode="scaleToFill"></image>
+      <view>关机</view>
+    </view>
+    <view class="item grid-list-item" bindtap="handleModel">
+      <image bindtap="" class="img-left icon" src="../../../img/remove_model_icon.png" mode="scaleToFill"></image>
+      <view>模式</view>
+    </view>
+    <view class="item grid-list-item" bindtap="handleWind">
+      <image bindtap="" class="img-left icon" src="../../../img/remove_wind_icon.png" mode="scaleToFill"></image>
+      <view>风速</view>
+    </view>
+  </view>
+</view>
