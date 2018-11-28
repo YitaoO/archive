@@ -1,0 +1,194 @@
+<!-- Item9模板 -->
+<template>
+<el-col :span="8" class="line-item item5" v-loading="loading">
+  <div class="title">
+    <div class="title-name">
+      生产情况
+    </div>
+    <!-- <div class="title-sanjiao"></div> -->
+  </div>
+  <div class="item5-center center-wrap grid-list">
+    <div class="left grid-list-item">
+      <div class="echart"></div>
+    </div>
+    <div class="right grid-list-item">
+      <p class="item first">
+        <span class="graphics"></span>
+        <span class="title">未完成：{{unFinishedQty}}片</span>
+        <!-- <span class="count">{{unFinishedQty}}片</span></p> -->
+      <p class="item seconed">
+        <span class="graphics"></span>
+        <span class="title">已生产：{{ProductQty}}片</span>
+        <!-- <span class="count">{{ProductQty}}片</span></p> -->
+      <p class="item thired">
+        <span class="graphics "></span>
+        <span class="title">存梁数：{{OutQty}}片</span>
+        <!-- <span class="count">{{OutQty}}片</span> -->
+      </p>
+      <p class="item four">
+        <span class="graphics"></span>
+        <span class="title">已安装：{{Installed}}片</span>
+        <!-- <span class="count">{{Installed}}片</span> -->
+      </p>
+    </div>
+  </div>
+</el-col>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      loading: true,
+      unFinishedQty: "",
+      ProductQty: "",
+      OutQty: "",
+      Installed: ""
+    };
+  },
+  mounted() {
+    this.getData();
+    // this.setArr()
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      let that = this;
+      this.$customAxios
+        .get("/wpNewBoard/getProdStatus", {
+          params: {
+            projid: "55400",
+            pactid: "1001002414",
+            yardid: "0"
+          }
+        })
+        .then(resq => {
+          let datas = resq.data;
+
+          this.unFinishedQty = datas.unFinishedQty;
+          this.ProductQty = datas.ProductQty;
+          this.OutQty = datas.OutQty;
+          this.Installed = datas.Installed;
+
+          this.setEcharts(datas);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    //计算百分比
+    rate(data, tatolData) {
+      return (data * 100 / (data + tatolData)).toFixed(0);
+    },
+
+    // 生成echarts
+    setEcharts(datas) {
+      let that = this;
+      // console.log(that.rate(datas.unFinishedQty, datas.ProductQty));
+
+      this.$echarts.init(document.querySelector(".echart")).setOption({
+        series: [
+          {
+            type: "pie",
+            // radius: ["60%", "100%"],
+
+            radius: "55%",
+            center: ["50%", "50%"],
+            // avoidLabelOverlap: false,
+            // labelLine: {
+            //   normal: {
+            //     show: false
+            //   }
+            // },
+            color: ["#F9D713 ", "#03D041", "#1277c2", "#D32626"],
+            // hoverAnimation: false,
+            // legendHoverLink: false,
+            data: [
+              {
+                value: datas.unFinishedQty,
+                // name: "你好"
+                name: `${that.rate(datas.unFinishedQty, datas.ProductQty)}%`
+              },
+              {
+                value: datas.ProductQty,
+                name: `${that.rate(datas.ProductQty, datas.ProductQty)}%`
+              },
+              {
+                value: datas.OutQty,
+                name: `${that.rate(datas.OutQty, datas.ProductQty)}%`
+              },
+              {
+                value: datas.Installed,
+                name: `${that.rate(datas.Installed, datas.ProductQty)}%`
+              }
+            ]
+          }
+        ]
+      });
+      this.loading = false;
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.item5-center {
+  .left {
+    position: relative;
+    width: 60%;
+    .echart {
+      width: 90%;
+      height: 90%;
+      @include verHorCenter;
+    }
+  }
+  .right {
+    .item {
+      // padding-bottom: 0.5rem;
+      .count {
+        font-family: Impact;
+      }
+    }
+    .first {
+      .graphics {
+        background: #f9d713;
+      }
+      .count {
+        color: #f9d713;
+      }
+    }
+    .seconed {
+      .graphics {
+        background: #03d041;
+      }
+      .count {
+        color: #03d041;
+      }
+    }
+    .thired {
+      .graphics {
+        background: #1277c2;
+      }
+      .count {
+        color: #1277c2;
+      }
+    }
+    .four {
+      .graphics {
+        background: #d32626;
+      }
+      .count {
+        color: #d32626;
+      }
+    }
+    .graphics {
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+    .title {
+      padding-left: 0.5rem;
+    }
+  }
+}
+</style>

@@ -1,0 +1,251 @@
+/* ================================================================================
+    公共样式
+================================================================================ */
+Page {
+  height: 100%;
+}
+.deviceIcon {
+  position: fixed;
+  right: 30rpx;
+  top: 13rpx;
+  width: 46rpx;
+  height: 46rpx;
+}
+.remote {
+  padding-bottom: 5vh;
+  border-bottom: 1rpx solid rgb(253, 252, 252);
+}
+.common-middle {
+  text-align: center;
+  position: relative;
+}
+.common-middle .remote-sd {
+  position: absolute;
+  top: 200rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+  line-height: 100%;
+}
+.common-middle .remote-sdshidu {
+  font-size: 14px;
+  color: rgb(247, 244, 244);
+}
+.common-middle .remote-wendu {
+  display: inline-block;
+  width: 416rpx;
+  height: 441rpx;
+}
+.common-middle .icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: 67rpx;
+  height: 85rpx;
+  margin: auto;
+}
+.common-middle .img-left {
+  left: 17%;
+}
+.common-middle .img-right {
+  right: 17%;
+}
+/* ------------------------------------------------------------
+   精密空调
+------------------------------------------------------------ */
+.remove-one {
+  height: 100%;
+}
+.remove-one .remote {
+  padding-top: 20rpx;
+}
+.remove-one .center-top {
+  padding: 2vh;
+}
+
+.remove-one .remote-dushu {
+  font-size: 60rpx;
+  color: #fff;
+}
+.remove-one .remote-sd {
+  top: 180rpx !important;
+}
+.remove-one .remote-image {
+  width: 230rpx;
+  bottom: 46px;
+  position: absolute;
+  height: 40rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.remove-one .remote-image image {
+  display: inline-block;
+  width: 3vh;
+  height: 3vh;
+  /* margin-right:15rpx; */
+}
+
+.remove-one .remote-centerdushu {
+  font-size: 170rpx;
+  color: #fff;
+}
+.remove-one .sd-centerdushu {
+  font-size: 90rpx;
+}
+.remove-one .sd-wendu {
+  font-size: 33rpx;
+  padding-top: 30rpx;
+}
+.remove-one .remote-shidu {
+  font-size: 50rpx;
+  color: #fff;
+}
+
+.remove-one .remote-sdwendu {
+  margin-right: 4vh;
+  font-size: 40rpx;
+  color: rgb(247, 244, 244);
+}
+
+.remove-one .remote-top,
+.remote-left,
+.remote-right {
+  font-size: 14px;
+  color: rgb(247, 244, 244);
+  display: inline-block;
+  width: 50%;
+}
+
+.remove-one .remote-top {
+  text-align: center;
+}
+
+.remove-one .remote-box {
+  margin-top: 8vh;
+  text-align: center;
+}
+
+.remove-one .remote-bottom {
+  display: inline-block;
+  width: 30%;
+}
+
+.remove-one .remote-left {
+  text-align: left;
+}
+
+.remove-one .remote-right {
+  text-align: right;
+}
+
+.remove-one .remote-img {
+  width: 5vh;
+  height: 5vh;
+  vertical-align: middle;
+}
+
+.remove-one .img-zhileng,
+.img-chushi {
+  position: absolute;
+  width: 3vh;
+  height: 3vh;
+  top: 32vh;
+}
+
+.remove-one .img-zhileng {
+  left: 25vh;
+}
+
+.remove-one .img-chushi {
+  right: 25vh;
+}
+
+.remove-one .img-shidu {
+  width: 12vh;
+  height: 12vh;
+  vertical-align: -50%;
+}
+.status01-wrap {
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.9);
+  text-align: center;
+}
+.status01-wrap .remote-img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 400rpx;
+  margin: auto;
+  width: 235rpx;
+  height: 235rpx;
+}
+.status01-wrap .remote-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 640rpx;
+  font-size: 32rpx;
+  margin: auto;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ------------------------------------------------------------
+   中央空调
+------------------------------------------------------------ */
+.remove-three {
+  height: 100%;
+}
+.three-top {
+  padding-top: 97rpx;
+  width: 100%;
+  height: 75%;
+  box-sizing: border-box;
+}
+
+.three-top .sd-centerdushu {
+  font-size: 113rpx;
+}
+.three-top .sd-wendu {
+  font-size: 27rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+.three-top .zhognyan-center {
+  font-size: 27rpx;
+  padding-top: 80rpx;
+  text-align: center;
+}
+.three-top .zhognyan-center .item {
+  width: 33%;
+  font-size: 30rpx;
+}
+.remove-two .zhognyan-center .item {
+  width: 25% !important;
+}
+.three-botton {
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 274rpx;
+  text-align: center;
+}
+.three-botton .item {
+  width: 33%;
+}
+.two-botton .item {
+  width: 25% !important;
+}
+.three-botton .item image {
+  width: 113rpx;
+  height: 113rpx;
+}
+
+/* ------------------------------------------------------------
+   区域空调
+------------------------------------------------------------ */

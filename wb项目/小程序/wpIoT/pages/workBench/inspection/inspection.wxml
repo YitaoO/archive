@@ -1,0 +1,109 @@
+<view class="inspection-wrap">
+  <view class="section grid-list " >
+    <view class="title grid-list-item" style="width:117rpx;" >设备ID</view>
+    <input class="title-input grid-list-item devIdInput" value="{{devId}}" bindinput="bindIdInput" type="number" bindblur="outBlur" placeholder="请输入设备ID"/>
+    <image class="grid-list-item" style="width:4vh;height:4vh;vertical-align:middle;" src="../../../img/shebeima.png" mode="scaleToFill" bindtap="toSao"></image>
+  </view>
+  <view class="section ">
+    <view class="title">巡检时间</view>
+    <view class="title-input">{{nowDate}}</view>
+  </view>
+  <view class="section section-picker  grid-list">
+    <view class="picker-title grid-list-item">巡检计划</view>
+
+    <view class="picker-image grid-list-item " bindtap="goPlanView" style="position:relative;">
+      <view  style="position:absolute;top:0;bottom:0;right:50rpx;">{{cpTitle}}</view>
+      <image src="../../../img/chakan.png" mode="scaleToFill"></image>
+    </view>
+  </view>
+
+  <view class="section-textarea border-bottom">
+
+    <view class="item-top ">
+      <text class="title ">巡检记录</text>
+    </view>
+    <view class="item-textarea">
+      <textarea class="title-text" adjust-position show-confirm-bar="{{showConfirmBar}}" bindinput="bindTextarea" placeholder="请输入问题描述..." />
+    </view>
+    <view class="item-image">
+      <!-- 图片上传 -->
+      <camera  kid-text="{{kid}}" new-edit="{{newAdit}}"></camera>
+    </view>
+    <view class="dingwei">
+      <image bindtap="" style="height:4vh;width:4vh;vertical-align:middle;" src="../../../img/quyu.png" mode="scaleToFill"></image>
+      {{address}}
+    </view>
+  </view>
+
+  <view class="section section-radio grid-list border-bottom clearfix">
+      <view class="grid-list-item" style="width:25%;">
+        <text class="title ">是否派单</text>
+      </view>
+      <radio-group class="radio-group grid-list-item" bindchange="radioChange" style="float:right;">
+        <label class="radio" >
+          <radio value="0" />是
+        </label>
+        <label class="radio" >
+          <radio value="1" checked />否
+        </label>
+      </radio-group>
+  </view>
+  <view class="section section-picker  grid-list" wx:if="{{enableRole}}">
+    <view class="picker-title grid-list-item">工单类型</view>
+      <view class="picker-choice grid-list-item" >
+      </view>
+    <view class="picker-image grid-list-item clearfix" bindtap="bindWoId" style="position:relative;">
+      <view  style="position:absolute;top:0;bottom:0;right:50rpx;">{{woName}}</view>
+      <image src="../../../img/chakan.png" mode="scaleToFill"></image>
+    </view>
+  </view>
+  <view class="section section-picker  grid-list border-bottom" wx:if="{{enableRole}}">
+    <view class="picker-title grid-list-item">指派给</view>
+    <view class="picker-image grid-list-item clearfix" bindtap="goEntrustListView" style="position:relative;">
+      <view  style="position:absolute;top:0;bottom:0;right:50rpx;">{{userName}}</view>
+      <image src="../../../img/chakan.png" mode="scaleToFill"></image>
+    </view>
+  </view>
+  <view class="over-radio clearfix" wx:if="{{enableRole}}">
+    <view class=" section section-radio grid-list border-bottom clearfix">
+      <view class="grid-list-item" style="width:25%;">
+        <text class="title ">设备状态</text>
+      </view>
+      <radio-group class="radio-group grid-list-item" bindchange="statusRadioChange" style="float:right;">
+        <label class="radio" >
+          <radio  value="0" />调整
+        </label>
+        <label class="radio" >
+          <radio checked value="1" />不调整
+        </label>
+      </radio-group>
+    </view>
+    <view class="section section-picker  grid-list" wx:if="{{devStatus == 0}}">
+      <view class="picker-title grid-list-item">状态选择</view>
+        <view class="picker-choice grid-list-item" >
+        </view>
+      <view class="picker-image grid-list-item clearfix" bindtap="bindStatus" data-type="1" style="position:relative;">
+        <view  style="position:absolute;top:0;bottom:0;right:50rpx;">{{devStatusName}}</view>
+        <image src="../../../img/chakan.png" mode="scaleToFill"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class=" record-list clearfix primary-color-03">
+    <view class="list-title border-bottom">查看最近5次巡检记录</view>
+    <view class="record-item grid-list border-bottom" wx:for="{{list}}" wx:key="list" data-kid="{{item.kid}}" bindtap="toInspeminfoView">
+      <view class="item-left ">
+        <view class="left-title font-default">{{item.devName}}</view>
+        <view class="left-date primary-color-02 font-small">{{item.addDate}}</view>
+      </view>
+      <view class="item-right grid-list-item">
+        <image bindtap="" style="height:3vh;width:3vh;vertical-align:middle;float:right;" src="../../../img/chakan.png" mode="scaleToFill"></image>
+      </view>
+
+    </view>
+
+  </view>
+  <view class="btn" bindtap="verification">
+    <button style="background-color:#16BB99" type="primary" > 新增 </button>
+  </view>
+</view>

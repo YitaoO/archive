@@ -1,0 +1,163 @@
+
+<template>
+<div class="mobile-item1" v-loading="loading">
+    <Title :index=1></Title>
+
+    <div class="item">
+        <p class="item-top grid-list">
+          <span class="top-left grid-list-item">
+          <span>当日计划生产梁数：</span>
+          <span class="count">{{dayPlanCnt}}</span>
+          </span>
+          <span class="top-right grid-list-item">
+         <span>当日完成梁数：</span>
+          <span class="count">{{dayActCnt}}</span>
+          </span>
+        </p>
+        <p class="item-bottom">
+          <span class="fill-bg" :style="{width:''+dayRate+'%'}"></span>
+          <span class="title-item">完成进度：<span class="count">{{dayRate}}%</span></span>
+
+        </p>
+      </div>
+      <div class="item">
+        <p class="item-top grid-list">
+          <span class="top-left grid-list-item">
+          <span>本月计划生产梁数：</span>
+          <span class="count">{{monthPlanCnt}}</span>
+          </span>
+          <span class="top-right grid-list-item">
+         <span>本月完成梁数：</span>
+          <span class="count">{{monthActCnt}}</span>
+          </span>
+        </p>
+        <p class="item-bottom">
+          <span class="fill-bg" 
+          :style="{width:''+monthRate+'%'}"
+          
+          ></span>
+          <span class="title-item">完成进度：<span class="count">{{monthRate}}%</span></span>
+        </p>
+      </div>
+      <div class="item">
+        <p class="item-top grid-list">
+          <span class="top-left grid-list-item">
+          <span>本年计划生产梁数：</span>
+          <span class="count">{{planProdCnt}}</span>
+          </span>
+          <span class="top-right grid-list-item">
+         <span>本年完成梁数：</span>
+          <span class="count">{{actProdCnt}}</span>
+          </span>
+        </p>
+        <p class="item-bottom">
+          <span class="fill-bg" :style="{width:''+prodRate+'%'}"></span>
+          <span class="title-item">完成进度：<span class="count">{{prodRate}}%</span></span>
+        </p>
+      </div>
+</div>
+</template>
+
+<script>
+import Title from "./title";
+export default {
+  components: {
+    Title
+  },
+  data() {
+    return {
+      loading: true,
+      dayPlanCnt: "",
+      dayActCnt: "",
+      dayRate: "",
+      monthPlanCnt: "",
+      monthActCnt: "",
+      monthRate: "",
+      yearPlanCnt: "",
+      yearActCnt: "",
+      yearRate: "",
+      planProdCnt: "",
+      actProdCnt: "",
+      prodRate: ""
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      this.$customAxios
+        .get("/wpNewBoard/getMKRate", {
+          params: {
+            projYardId: this.$cookies.get("board_yardId"),
+            makeDate: this.$moment(new Date()).format("YYYY-MM-DD"),
+            makeM: this.$moment(new Date()).format("M"),
+            makeY: this.$moment(new Date()).format("YYYY")
+          }
+        })
+        .then(resq => {
+          let datas = resq.data;
+          this.dayPlanCnt = datas.dayPlanCnt;
+          this.dayActCnt = datas.dayActCnt;
+          this.dayRate = datas.dayRate;
+          this.monthPlanCnt = datas.monthPlanCnt;
+          this.monthActCnt = datas.monthActCnt;
+          this.monthRate = datas.monthRate;
+          this.yearPlanCnt = datas.yearPlanCnt;
+          this.yearActCnt = datas.yearActCnt;
+          this.yearRate = datas.yearRate;
+
+          this.planProdCnt = datas.planProdCnt;
+          this.actProdCnt = datas.actProdCnt;
+          this.prodRate = datas.prodRate;
+
+          this.loading = false;
+        })
+        .catch(error => {});
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.mobile-item1 {
+  .item {
+    padding-bottom: 0.5rem;
+    .item-top {
+      padding-top: 0.5rem;
+      padding-bottom: 0.6rem;
+      .top-left {
+        width: 50%;
+        text-align: left;
+      }
+      .count {
+        color: #000;
+      }
+      .top-right {
+        text-align: right;
+      }
+    }
+    .item-bottom {
+      position: relative;
+      width: 100%;
+      height: 1.5rem;
+      background: #dee8ef;
+      font-size: 0.6rem;
+      .title-item {
+        font-family: PingFangSC-Regular;
+        position: absolute;
+        top: 0.4rem;
+        left: 0.5rem;
+      }
+
+      .fill-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: #9fea3d;
+      }
+    }
+  }
+}
+</style>

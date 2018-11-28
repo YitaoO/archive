@@ -1,0 +1,120 @@
+<template>
+<div id="Mobile-wrap">
+  <div v-if="projectList.length>0">
+  <Header></Header>
+  <div class="item-wrap">
+    <Item1 class="item-center"></Item1>
+    <Item2 class="item-center"></Item2>
+    <Item3 class="item-center"></Item3>
+    <Item4 class="item-center"></Item4>
+    <Item5 class="item-center"></Item5>
+    <Item6 class="item-center"></Item6>
+  </div>
+  </div>
+</div>
+</template>
+
+<script>
+import md5 from "md5";
+import Header from "@/views/mobile/header";
+import Item1 from "@/views/mobile/item1";
+import Item2 from "@/views/mobile/item2";
+import Item3 from "@/views/mobile/item3";
+import Item4 from "@/views/mobile/item4";
+import Item5 from "@/views/mobile/item5";
+import Item6 from "@/views/mobile/item6";
+import wranIcon from "../../assets/warn_icon.png";
+import itemBg from "../../assets/item_bg_icon.png";
+export default {
+  name: "MobileBoard",
+  components: {
+    Header,
+    Item1,
+    Item2,
+    Item3,
+    Item4,
+    Item5,
+    Item6
+  },
+  data() {
+    return {
+      iconStyle: {
+        background: `url(${wranIcon}) no-repeat`,
+        backgroundSize: "100% 100%"
+      },
+      listItemBg: {
+        background: `url(${itemBg}) no-repeat`,
+        backgroundSize: "100% 100%"
+      },
+      projectList: []
+    };
+  },
+  mounted() {
+    // this.login();
+    this.getData();
+  },
+  methods: {
+    //登录
+    login() {
+      let ProdUrl = `/api/login?userId=6&password=e10adc3949ba59abbe56e057f20f883e`;
+      let testUrl = `/api/login?userId=1001120&password=25f9e794323b453885f5181f1b624d0b`;
+      // TODO: 一般不放在url上
+      this.$customAxios
+        .post(ProdUrl)
+        .then(resq => {
+          this.getData();
+        })
+        .catch(error => {});
+    },
+    // 获取项目列表
+    getData() {
+      let yardId = this.$cookies.get("board_yardId");
+      this.$customAxios
+        .get("wpNewBoard/switchYard")
+        .then(resq => {
+          if (!yardId) {
+            this.$cookies.set("board_yardId", resq.data[0].yardId);
+          }
+
+          this.projectList = resq.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
+};
+</script>
+
+<style rel="stylesheet/scss" lang="scss">
+@import "@/common/style/board/common.scss";
+
+#Mobile-wrap {
+  box-sizing: border-box;
+  overflow: scroll;
+  background: #fff;
+  .item-wrap {
+    padding: 1rem;
+    margin-top: 4rem;
+    .item-center {
+      margin-bottom: 0.5rem;
+      color: #2e3b46;
+      font-size: 0.6rem;
+      border-bottom: 1px solid #eef3f7;
+      padding-bottom: 0.5rem;
+    }
+  }
+  .item {
+    position: relative;
+    .noData {
+      position: absolute;
+      left: 0;
+      right: 0;
+
+      top: 5rem;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+  }
+}
+</style>

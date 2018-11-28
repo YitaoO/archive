@@ -1,0 +1,18 @@
+/* ------------------------------------------------------------
+   首页模块样式
+------------------------------------------------------------ */
+#home {
+  height: 100%;
+}
+
+.home-wrap {
+  height: 100%;
+}
+
+.home-header {
+  height: 50px !important;
+  line-height: 50px !important;
+  box-shadow: 0 2px 10px 0 rgba(92, 92, 92, 0.1);
+  border: solid 1px #dcdfe1;
+  background: #fff;
+}

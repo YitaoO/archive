@@ -1,0 +1,84 @@
+<!-- header模板 -->
+<template>
+<div id="mobile-header">
+  <div class="title">预制梁场生产车间运行监控</div>
+  <div class="botton">
+      <span class="time">今日 {{startDate}} </span>
+      <span class="icon" :style="headerBg"></span>
+      <span class="des">总工期{{durations}}天, 已安全运作{{safeRunDays}}天。</span>
+  </div>
+</div>
+</template>
+
+<script>
+import TimeIcon from "../../assets/header_date_icon.png";
+
+export default {
+  data() {
+    return {
+      durations: "",
+      safeRunDays: "",
+      time: "",
+      yardId: "",
+      startDate: "",
+      headerBg: {
+        background: `url(${TimeIcon}) no-repeat`,
+        backgroundSize: "100% 100%"
+      }
+    };
+  },
+  props: {
+    list: Array
+  },
+  created() {
+    this.yardId = this.$cookies.get("board_yardId");
+    this.startDate = this.$moment(new Date()).format("YYYY-MM-DD"); //修改为获取当前地址
+    this.getData();
+  },
+  methods: {
+    getData() {
+      this.$customAxios
+        .get("/wpNewBoard/getDuraSafeRun", {
+          params: {
+            projYardId: this.yardId
+          }
+        })
+        .then(resq => {
+          this.durations = resq.data.durations;
+          this.safeRunDays = resq.data.safeRunDays;
+        })
+        .catch(error => {});
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+#mobile-header {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  background: #fff;
+  top: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 12px 14px 0 rgba(0, 0, 0, 0.05);
+  .title {
+    font-family: PingFangSC-Semibold;
+    font-size: 0.9rem;
+    color: #2e3b46;
+    padding-bottom: 0.5rem;
+  }
+  .botton {
+    font-family: PingFangSC-Regular;
+    font-size: 0.6rem;
+    color: #2e3b46;
+  }
+  .icon {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+}
+</style>

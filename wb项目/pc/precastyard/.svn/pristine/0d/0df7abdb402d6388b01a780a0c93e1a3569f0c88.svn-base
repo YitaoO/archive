@@ -1,0 +1,186 @@
+<!-- Item4模板 -->
+<template>
+<el-col :span="8" class="line-item item4" v-loading="loading">
+  <div class="title">
+    <div class="title-name">
+      计划实际对比
+    </div>
+    <!-- <div class="title-sanjiao">
+    </div> -->
+  </div>
+  <div class="item-right ">
+    <span class="graphics left"></span>
+    <span class="title4">计划数</span>
+
+    <span class="graphics middle"></span>
+    <span class="graphics right"></span>
+    <span class="title4">完成数</span>
+
+  </div>
+  <div class="item-echart center-wrap">
+
+  </div>
+</el-col>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      loading: true
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      // let that = this
+      this.$customAxios
+        .get("wpNewBoard/getProdSumRate", {
+          params: {
+            projYardId: this.$cookies.get("board_yardId")
+          }
+        })
+        .then(resq => {
+          let datas = resq.data;
+
+          this.setEcharts(datas);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    // 生成echarts
+    setEcharts(datas) {
+      let arrX = [];
+      let planCntList = [];
+      let actCntList = [];
+      let unComplateList = [];
+      let unComplateListColor = [];
+      datas.forEach(function(item) {
+        arrX.push(item.makeM);
+        let unComplate = Number(item.planCnt) - Number(item.actCnt);
+        planCntList.push(item.planCnt);
+        actCntList.push(item.actCnt);
+        // actCntList.push(unComplate > 0 ? undefined : datas[i].actCnt);
+        unComplateList.push(unComplate > 0 ? unComplate : item.actCnt);
+        unComplateListColor.push(unComplate > 0 ? "#FF0000" : "#00FF42");
+      });
+
+      // for (let i in datas) {
+      //   let unComplate = Number(datas[i].planCnt) - Number(datas[i].actCnt);
+      //   arrX.push(`${i}月`);
+      //   planCntList.push(datas[i].planCnt);
+      //   actCntList.push(datas[i].actCnt);
+      //   // actCntList.push(unComplate > 0 ? undefined : datas[i].actCnt);
+      //   unComplateList.push(unComplate > 0 ? unComplate : datas[i].actCnt);
+      //   unComplateListColor.push(unComplate > 0 ? "#FF0000" : "#00FF42");
+      // }
+
+      this.$echarts.init(document.querySelector(".item-echart")).setOption({
+        color: ["#FFE000"],
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow"
+          }
+        },
+        calculable: true,
+        grid: {
+          top: 20,
+          bottom: 25,
+          left: 30,
+          right: 30
+        },
+        xAxis: [
+          {
+            type: "category",
+            axisTick: {
+              show: false
+            },
+            data: arrX,
+            axisLabel: {
+              textStyle: {
+                color: "#fff"
+              }
+            }
+          }
+        ],
+        yAxis: [
+          {
+            type: "value",
+            axisLabel: {
+              textStyle: {
+                color: "#fff"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            type: "bar",
+            barGap: 0,
+            barWidth: 15, //柱图宽度
+            data: planCntList
+          },
+          {
+            type: "bar",
+            barWidth: 15, //柱图宽度
+            data: actCntList,
+            itemStyle: {
+              normal: {
+                color: function(params) {
+                  var colorList = unComplateListColor;
+                  return colorList[params.dataIndex];
+                }
+              }
+            }
+          }
+        ]
+      });
+
+      this.loading = false;
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.item4 {
+  position: relative;
+  .item-right {
+    position: absolute;
+    right: 1rem;
+    width: 9rem;
+    top: 2rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    .graphics {
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+
+      &.left {
+        background: #ffe000;
+      }
+      &.middle {
+        background: #00ff42;
+      }
+      &.right {
+        background: #ff0000;
+      }
+    }
+    .title4 {
+      font-family: PingFangSC-Regular;
+      font-size: 0.8rem;
+      color: #ffffff;
+      padding-right: 0.8rem;
+    }
+  }
+  .item-echart {
+    padding: 1rem !important;
+  }
+}
+</style>

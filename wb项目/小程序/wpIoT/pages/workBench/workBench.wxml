@@ -1,0 +1,32 @@
+<view>
+    <view class="Work">
+        <view class="itme">
+            <image class="itme-img" bind:tap="toSao" src="../../img/saoshebeima.png" mode="scaleToFill"></image>
+            <view class="itme-class">扫设备二维码</view>
+        </view>
+        <view class="itme-cen">
+            <image class="itme-img" bind:tap="toInspection" src="../../img/xunjian.png" mode="scaleToFill"></image>
+            <view class="itme-class">巡检</view>
+        </view>
+        <view class="itme" bind:tap="toRecord">
+            <image class="itme-img" src="../../img/xunjianjilu.png" mode="scaleToFill"></image>
+            <view class="itme-class">巡检记录</view>
+        </view>
+        <view class="itme" bind:tap="toMandispatch">
+            <image class="itme-img" src="../../img/paidan.png" mode="scaleToFill"></image>
+            <view class="itme-class">派单</view>
+        </view>
+        <view class="itme-cen" bind:tap="toActivework">
+            <image class="itme-img" src="../../img/lishigongdan.png" mode="scaleToFill"></image>
+            <view class="itme-class">工单</view>
+            </view>
+        <view class="itme" bind:tap="overpment">
+            <image class="itme-img" src="../../img/guobaoshebei.png" mode="scaleToFill"></image>
+            <view class="itme-class">设备延保</view>
+        </view>
+         <!-- <view class="itme itme-last">
+            <image class="itme-img" src="../../img/weixiujilu.png" mode="scaleToFill"></image>
+            <view class="itme-class">维修记录</view>
+        </view> -->
+    </view>
+</view>

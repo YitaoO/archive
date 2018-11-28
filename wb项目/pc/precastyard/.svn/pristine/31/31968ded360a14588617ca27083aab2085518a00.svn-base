@@ -1,0 +1,154 @@
+<template>
+<div id="Mobile-wrap">
+  <div class="wran-wrap" v-if="!isShow" style="width:100%;">
+      <span class="icon" :style="iconStyle"></span>
+      <p class="title">为了更好的体验，请使用横屏浏览页面</p>
+  </div>
+  <div class="wrap" v-if="isShow">
+    <Header></Header>
+    <div class="wrap primary-color-white">
+        <el-row class="center-line">
+            <Item0 class="line-item item0" :style="listItemBg"></Item0>
+            <Item9 class="line-item item1" :style="listItemBg"></Item9>
+            <Item2 class="line-item item2" :style="listItemBg"></Item2>
+
+        </el-row>
+        <el-row class="center-line">
+            <Item11 class="line-item item3" :style="listItemBg"></Item11>
+            <Item4 class="line-item item4" :style="listItemBg"></Item4>
+            <Item10 class="line-item item5" :style="listItemBg"></Item10>
+
+        </el-row>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+import Header from "@/views/Board/header";
+import Item0 from "@/views/Board/item0";
+import Item2 from "@/views/Board/item2";
+import Item4 from "@/views/Board/item4";
+import Item9 from "@/views/Board/item9";
+import Item10 from "@/views/Board/item10";
+import Item11 from "@/views/Board/item11";
+import wranIcon from "../../assets/warn_icon.png";
+import itemBg from "../../assets/item_bg_icon.png";
+export default {
+  name: "MobileBoard",
+  components: {
+    Header,
+    Item0,
+    Item2,
+    Item4,
+    Item9,
+    Item10,
+    Item11
+  },
+  data() {
+    return {
+      isShow: false,
+      iconStyle: {
+        background: `url(${wranIcon}) no-repeat`,
+        backgroundSize: "100% 100%"
+      },
+      listItemBg: {
+        background: `url(${itemBg}) no-repeat`,
+        backgroundSize: "100% 100%"
+      }
+      // wranIcon: wranIcon
+    };
+  },
+  mounted() {
+    this.getData();
+    this.onResize();
+    window.addEventListener("orientationchange", this.onResize, false);
+  },
+  methods: {
+    onResize() {
+      if (window.orientation == 180 || window.orientation == 0) {
+        console.log("竖屏状态！");
+        this.isShow = false;
+      }
+      if (window.orientation == 90 || window.orientation == -90) {
+        console.log("横屏状态！");
+        this.isShow = true;
+      }
+    },
+    // 获取项目列表
+    getData() {
+      let yardId = this.$cookies.get("board_yardId");
+      this.$customAxios
+        .get("wpNewBoard/switchYard")
+        .then(resq => {
+          if (!yardId) {
+            this.$cookies.set("board_yardId", resq.data[0].yardId);
+          }
+
+          this.projectList = resq.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
+};
+</script>
+
+<style rel="stylesheet/scss" lang="scss">
+@import "../../common/style/board/mobileCommon.scss";
+#Mobile-wrap {
+  .wran-wrap {
+    position: absolute;
+    text-align: center;
+    padding-top: 7rem;
+    font-size: 1rem;
+    color: #999;
+    .icon {
+      width: 8rem;
+      height: 8rem;
+      display: inline-block;
+    }
+    .title {
+      padding-top: 0.5rem;
+    }
+  }
+  .item0,
+  .item3,
+  .item2,
+  .item5 {
+    width: 30%;
+  }
+  .item1,
+  .item4 {
+    width: 36%;
+  }
+  .line-item {
+    position: relative;
+    height: 20rem;
+
+    margin-right: 1%;
+
+    margin-bottom: 1%;
+
+    &.line-item:first-child {
+      margin-left: 1%;
+    }
+    .title {
+      position: relative;
+      height: 2rem;
+      padding-left: 2rem;
+      .title-name {
+        position: absolute;
+        top: 0.5rem;
+        left: 2rem;
+      }
+    }
+    .center-wrap {
+      // height: 18rem;
+      padding-top: 1rem;
+      height: 16rem;
+    }
+  }
+}
+</style>

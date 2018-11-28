@@ -1,0 +1,32 @@
+/**
+ * board页面入口
+ */
+import "@/common/js/resources"; //引用通用内容
+import Vue from "vue";
+import board from "./board.vue";
+import "@/common/style/board/common.scss"; // 引用通用样式
+
+// ele-ui引入
+import { Header, Progress, Button, Carousel, CarouselItem } from "element-ui";
+Vue.use(Header);
+Vue.use(Progress);
+Vue.use(Button);
+Vue.use(Carousel);
+Vue.use(CarouselItem);
+
+// 实例化
+const BoardVue = new Vue({
+  el: "#Board",
+  components: {
+    board
+  },
+  mounted() {},
+  created() {
+    // this.checkLogin()
+  },
+  methods: {}
+});
+//设置html->font-size
+let ele = document.getElementsByTagName("html")[0],
+  size = (document.body.clientWidth / 1920) * 20;
+ele.style.fontSize = size + "px";

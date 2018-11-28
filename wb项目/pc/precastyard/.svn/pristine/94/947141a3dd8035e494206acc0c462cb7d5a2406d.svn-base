@@ -1,0 +1,92 @@
+<!-- Item6模板 -->
+<template>
+<el-col :span="8" class="line-item item6" v-loading="loading">
+  <div class="title">
+    <div class="title-name">
+      实时信息
+    </div>
+    <!-- <div class="title-sanjiao"></div> -->
+  </div>
+  <div class="item6-center center-wrap">
+    <vue-seamless-scroll :data="list" class="scroll-list">
+      <ul>
+        <li class="item" v-for="(item,index) in list" :key="index">
+          <span :class="item.infoType == 1?'warm':''">{{item.infoTitle}},{{item.infoDesc}}</span>
+        </li>
+      </ul>
+    </vue-seamless-scroll>
+
+  </div>
+</el-col>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      loading: true,
+      list: []
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  computed: {
+    classOption() {
+      return {
+        // singleHeight: 60,
+        step: 0.1,
+        waitTime: 4500,
+        limitMoveNum: 3
+      };
+    }
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      // let that = this
+      this.$customAxios
+        .get("/wpBoard/getRealTimeInfo", {
+          params: {
+            projid: "55400",
+            pactid: "1001002414",
+            yardid: "0"
+          }
+        })
+        .then(resq => {
+          this.list = resq.data;
+          this.loading = false;
+        })
+        .catch(error => {});
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.item6-center {
+  padding: 1.5rem 1rem 1rem 1rem !important;
+  font-family: PingFangSC-Regular;
+  font-size: 0.8rem;
+  color: #2effd8;
+
+  p {
+    padding-bottom: 0.8rem;
+  }
+  .item {
+    // height: 1.5rem;
+    width: 100%;
+    padding-bottom: 0.5rem;
+    line-height: 1.2rem;
+    // height: 2.2rem;
+    // @include oneLine;
+    .warm {
+      color: red;
+    }
+  }
+  .scroll-list {
+    height: 10.5rem;
+    overflow: hidden;
+  }
+}
+</style>

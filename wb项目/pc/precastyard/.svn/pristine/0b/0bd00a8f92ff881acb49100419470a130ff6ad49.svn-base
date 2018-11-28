@@ -1,0 +1,84 @@
+<!-- item10模板 -->
+<template>
+<el-col :span="8" class="line-item item8">
+  <div class="title">
+    <div class="title-name">
+      生产照片
+    </div>
+    <!-- <div class="title-sanjiao"></div> -->
+  </div>
+  <div class="center-wrap ">
+    <el-carousel height="34.8vh">
+      <el-carousel-item v-for="item in 6" :key="item">
+        <!-- <h3>{{ item }}</h3> -->
+      </el-carousel-item>
+    </el-carousel>
+      <!-- <el-row :gutter="20" class="item-wrap">
+        <el-col :span="12"  class="pic-wrap"><div class="item-pic item-pic0"></div></el-col>
+        <el-col :span="12" class="pic-wrap"><div class="item-pic item-pic1"></div></el-col>
+        <el-col :span="12" class="pic-wrap"><div class="item-pic item-pic0"></div></el-col>
+        <el-col :span="12" class="pic-wrap"><div class="item-pic item-pic1"></div></el-col>
+        <el-col :span="12" class="pic-wrap"><div class="item-pic item-pic0"></div></el-col>
+        <el-col :span="12" class="pic-wrap"><div class="item-pic item-pic1"></div></el-col>
+      </el-row> -->
+  </div>
+
+
+</el-col>
+</template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  methods: {},
+  computed: {}
+};
+</script>
+
+<style lang="scss">
+.item8 {
+  .center-wrap {
+    padding: 1rem;
+    .item-wrap {
+      height: 100%;
+
+      //到时多张图片时把这行代码去掉
+      margin-top: 5rem;
+    }
+    .pic-wrap {
+      height: 48%;
+      padding-bottom: 1%;
+
+      .item-pic {
+        height: 100%;
+        &.item-pic0 {
+          background: url("../../assets/testImg/1.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        &.item-pic1 {
+          background: url("../../assets/testImg/2.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        // &.item-pic2 {
+        //   background: url("../../assets/testImg/3.png") no-repeat;
+        //   background-size: 100% 100%;
+        // }
+        // &.item-pic3 {
+        //   background: url("../../assets/testImg/4.png") no-repeat;
+        //   background-size: 100% 100%;
+        // }
+      }
+    }
+  }
+}
+.el-carousel__item:nth-child(2n + 1) {
+  background: url("http://test200.gxyfrr.cc/static/wpms/zhangla1.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+.el-carousel__item:nth-child(2n) {
+  background: url("http://test200.gxyfrr.cc/static/wpms/zhangla2.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+</style>

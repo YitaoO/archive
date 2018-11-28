@@ -1,0 +1,94 @@
+
+.view-item{
+  padding:10rpx 20rpx;
+  margin-top:20rpx;
+}
+/* ------------------------------------------------------------
+   头部
+------------------------------------------------------------ */
+.item-top .top-left{
+  width: 70%;
+}
+.item-top .top-right{
+  text-align: right;
+}
+.top-left span{
+  padding-left:10rpx;
+}
+.item-top .address-icon{
+  width:39rpx;
+  height:50rpx;
+  vertical-align: middle;
+}
+.address-arrow{
+  width:26rpx;
+  height:26rpx;
+
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkI4MUE0NzgwMzA5RDExRThCRUM4RkJENzNCRTNBODJGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkI4MUE0NzgxMzA5RDExRThCRUM4RkJENzNCRTNBODJGIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QjgxQTQ3N0UzMDlEMTFFOEJFQzhGQkQ3M0JFM0E4MkYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QjgxQTQ3N0YzMDlEMTFFOEJFQzhGQkQ3M0JFM0E4MkYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6tcM1wAAABd0lEQVR42uyY20rDQBRFE1N/yEe/QkRFi4ioRETEW4t3Ee+KtyJSTFVEREVF/As/SkvcA2dgP0kC0zMpeGBRuvuQxWQuZxqmaRoUoTqCglTprx+TJHHykDiO22dE8oiMgzoI1V8N1RhoiISZ3dPyqT4i3TQSU6DmemSyikyCe/o+A85dymQVaYIJ8EDZLDjzMVmbMlceKZtzJZN3+RqZUfBE2Tw48bGzGpkR8ELZIjj2scUbmWHwSlkVHPo4a4xMGbxRtgT2fRx6VuadshWw6+P0/RGZD8rWwLaPNuAbDIFPyjbAVtv1I65EOsEz6KFsR3tESrLB9VK2BzY1RyQSiT7KDsC65quxEv2UHYFVzTkSyeE3QNkpWNacrJG0A4OUmd6korlqImmQypRdgAXN5Wsk7uSws1VzIZFHxEjcyPFv61J6kVRT5FoaIltX0io66+SzinzRQ+vSPDu9TmS919yKdFcr7jR5RAK5YLWswv+/JYoq8ivAAHuCSH7VHupGAAAAAElFTkSuQmCC) no-repeat;
+  background-size: 100% 100%;
+
+}
+
+/* ------------------------------------------------------------
+   中部
+------------------------------------------------------------ */
+.item-center{
+  /* line-height: 260rpx; */
+  text-align: center;
+  width: 100%;
+  padding-top:50rpx;
+
+}
+.item-center .wendu{
+    display:block;
+    text-align:center;
+    font-weight: 600;
+}
+.item-center .shidu{
+    font-size: 32rpx;
+    display:block;
+    text-align:center;
+    color:#292f2e;
+}
+.shidu image{
+  height:20rpx;
+  width:28rpx;
+  vertical-align:middle;
+}
+.item-count{
+  font-size:32rpx;
+  padding-top:18rpx;
+  padding-left:29rpx;
+
+}
+.item-count text{
+  color:#666;
+}
+.item-count .count{
+  /* width:100rpx; */
+}
+/* ------------------------------------------------------------
+   底部
+------------------------------------------------------------ */
+.item-footer{
+  margin-top:10rpx;
+}
+.shebei{
+  width: 50%;
+  color:#999;
+}
+.shebei .address-arrow{
+  width:30rpx;
+  height:30rpx;
+
+}
+
+.shebei-title{
+    font-size: 48rpx;
+    padding-left:10rpx;
+    padding-right:5rpx;
+
+}
+.shebei-count{
+  font-size:30rpx;
+}

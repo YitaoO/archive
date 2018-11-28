@@ -1,0 +1,106 @@
+<!-- title模板 -->
+<template>
+<div id="pc-title">
+   <div class="title-name">
+      {{titleName}}
+    </div>
+    <div class="bg-wrap">
+      
+      <span class="bar 01"></span>
+      <span class="bar 02"></span>
+      <span class="bar 03"></span>
+      <span class="line"></span>
+    </div>
+    <!-- <div class="bg-wrap">
+      <span class="item-bg" :style="titleIcon"></span> 
+    </div>   -->
+</div>
+</template>
+
+<script>
+import titleIcon from "../../assets/item_bg_icon.png";
+
+export default {
+  data() {
+    return {
+      titleName: "",
+      titleIcon: {},
+      titleIcon: {
+        background: `url(${titleIcon}) no-repeat`,
+        backgroundSize: "100% 100%"
+      }
+    };
+  },
+  props: {
+    index: Number
+  },
+  created() {
+    let title = "";
+    let icon = "";
+    switch (this.index) {
+      case 1:
+        title = "生产情况";
+        break;
+      case 2:
+        title = "制梁进度";
+
+        break;
+      case 3:
+        title = "梁场介绍";
+        break;
+      case 4:
+        title = "计划实际对比";
+        break;
+      case 5:
+        title = "梁安装比率";
+
+        break;
+      case 6:
+        title = "生产照片";
+        break;
+
+      default:
+        break;
+    }
+    this.titleName = title;
+  },
+  methods: {}
+};
+</script>
+
+<style lang="scss">
+#pc-title {
+  line-height: 2rem;
+  position: relative;
+  display: flex;
+  .title-name {
+    font-size: 1.1rem;
+    color: #4ef5ff;
+    flex: 0 0 30%;
+  }
+  .bg-wrap {
+    position: relative;
+    width: 100%;
+    .bar {
+      bottom: 0.7rem;
+      display: inline-block;
+      width: 0.4rem;
+      height: 0.6rem;
+      transform: skew(20deg);
+      background: #4ef5ff;
+      // margin-right: 0.1rem;
+    }
+    .line {
+      display: inline-block;
+      position: absolute;
+      width: calc(100% - 1.6rem);
+      // width: 91%;
+      height: 0.1rem;
+      right: 0;
+      bottom: 0.65rem;
+
+      background: #4ef5ff;
+    }
+  }
+}
+</style>

@@ -1,0 +1,37 @@
+/* ------------------------------------------------------------
+   Tabs样式
+------------------------------------------------------------ */
+.tabs{
+  line-height: 80rpx;
+  color: #ccc;
+  font-size: 14px;
+  background-color:#fff;
+  border-bottom:1px solid #ccc;
+  padding-bottom:5px;
+  text-align:center;
+  position:fixed;
+  width:100%;
+  top:0;
+
+}
+
+.tabs .tabs-conter{
+  background-color:#fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabs .navigator-hover{
+  color: #17B990;
+  background-color: white;
+  position: relative;
+}
+
+.tabs .navigator-hover::before{
+  content:"";
+  position: absolute;
+  bottom: -10rpx;
+  left: 30%;
+  width: 50rpx;
+  height: 6rpx;
+  background-color: #17B990;
+}

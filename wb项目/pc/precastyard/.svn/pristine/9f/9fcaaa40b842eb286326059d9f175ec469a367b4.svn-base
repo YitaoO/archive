@@ -1,0 +1,220 @@
+<!-- Item1模板 -->
+<template>
+<el-col :span="8" class="line-item  primary-color-white" v-loading="loading">
+  <el-row class="item0">
+    <el-col :span="10" class="item0-left">
+      <p>累计产量(片)</p>
+      <p class="left-addCount">
+        <span v-for="item in actProdCnt" :key="item">{{item}}</span>
+      </p>
+      <p class="plan-title font-size-16">计划产量(片)</p>
+      <p class="plan-count">{{planProdCnt}}</p>
+      <p class="plan-title font-size-16">完成率</p>
+      <p class="plan-count">{{prodRate}}%</p>
+    </el-col>
+    <el-col :span="14" class="item0-right clearfix">
+
+      <div class="item" :class="(index % 2 ==0) ?'':'item-right'" v-for="(item,index) in prods" :key="item.key">
+        <p class="title">{{item.name}}</p>
+        <div class="itemPie">
+          <div :class="item.key"></div>
+          <span class="explain count">{{item.value}}%</span>
+          <span class="explain title0">合格率</span>
+        </div>
+      </div>
+    </el-col>
+  </el-row>
+  <!-- <my-loading :loading="loading"></my-loading> -->
+</el-col>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      loading: true,
+      planProdCnt: '',
+      actProdCnt: [],
+      prodRate: '',
+      prods: []
+    }
+  },
+  // components: {
+  //   // Loading1
+  // },
+  mounted() {
+    this.getData()
+
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      let that = this
+      that.$customAxios.get('/wpBoard/getProdChkRate', {
+        params: {
+          projid: '55400',
+          pactid: '1001002414',
+          yardid: 'AB8D519B-242E-4F98-B647-EC6AAE496F0F'
+
+        }
+
+      }).then(resq => {
+        let datas = resq.data
+        let actProdCnt = `${datas.actProdCnt}`
+
+        that.planProdCnt = datas.planProdCnt
+        that.actProdCnt = actProdCnt.split('')
+        that.prodRate = datas.prodRate
+        that.prods = that.setProds(datas.prods)
+
+
+        that.setEcharts()
+
+
+      }).catch(error => {})
+    },
+    // 设置数组
+    setProds(prods) {
+      let arr = []
+      let j = 0
+      for (let i in prods) {
+        arr.push({
+          name: i,
+          value: prods[i],
+          key: `itemPie${j}`
+        })
+        j++;
+      }
+      return arr
+    },
+    // 设置echart
+    setEcharts() {
+      let that = this
+      setTimeout(function() {
+        that.prods.forEach(function(item, key) {
+
+          that.$echarts.init(document.querySelector(`.itemPie${key}`)).setOption(that.option(item.value));
+
+        })
+        that.loading = false
+      }, 1000);
+
+    },
+    // 配置echarts
+    option(value) {
+      return {
+        series: [{
+          type: 'pie',
+          radius: ['70%', '100%'],
+          avoidLabelOverlap: false,
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          color: ['#2EFFD8', '#2D2F48'],
+          hoverAnimation: false,
+          legendHoverLink: false,
+          data: [{
+              value: value
+            },
+            {
+              value: 100 - parseInt(value)
+            }
+
+          ]
+        }]
+      }
+    }
+  }
+
+};
+</script>
+
+<style lang="scss">
+.item0 {
+    padding: 0.5rem;
+
+}
+.item0-left {
+    .left-addCount {
+        padding-top: 0.5rem;
+        span {
+            width: 1rem;
+            height: 1.6rem;
+            line-height: 1.6rem;
+            text-align: center;
+            display: inline-block;
+            font-family: Impact;
+            font-size: 1.2rem;
+            background-image: linear-gradient(-180deg, #2EFFD8 0%, #004C79 52%, #2EFFD8 100%);
+            border-radius: 2px;
+        }
+
+    }
+    .plan-title {
+        padding-top: 1rem;
+        padding-bottom: 0;
+    }
+    .plan-count {
+        font-family: Impact;
+        font-size: 1.6rem;
+        color: #2EFFD8;
+        line-height: 2rem;
+    }
+}
+.item0-right {
+    // padding: 0.5rem;
+    box-sizing: border-box;
+    .title {
+        padding-left: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    .item {
+
+        height: 50%;
+        float: left;
+        width: 50%;
+        padding-bottom: 0.5rem;
+        &.item-right {
+            padding-left: 1.5rem;
+            box-sizing: border-box;
+        }
+        .itemPie {
+            width: 4.8rem;
+            height: 4.8rem;
+            position: relative;
+        }
+        .itemPie0,
+        .itemPie1,
+        .itemPie2,
+        .itemPie3 {
+            width: 4.8rem;
+            height: 4.8rem;
+        }
+        .explain {
+
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display: inline-block;
+            text-align: center;
+            &.count {
+                top: 1.5rem;
+                font-family: Impact;
+                font-size: 1.2rem;
+                color: #FFFFFF;
+            }
+            &.title0 {
+                top: 2.8rem;
+                font-family: PingFangSC-Semibold;
+                font-size: 0.5rem;
+                color: #2EFFD8;
+            }
+
+        }
+    }
+
+}
+</style>

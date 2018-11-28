@@ -1,0 +1,181 @@
+
+<template>
+<div class="mobile-item4">
+  <Title :index=4></Title>
+  <div class="item">
+    <div class="item-right ">
+    <span class="graphics left"></span>
+    <span class="title4">计划数</span>
+
+    <span class="graphics middle"></span>
+    <span class="graphics right"></span>
+    <span class="title4">完成数</span>
+
+  </div>
+    <div class="item-echart"></div>
+  </div>    
+</div>
+
+</template>
+
+<script>
+import Title from "./title";
+
+export default {
+  components: {
+    Title
+  },
+  data() {
+    return {
+      loading: true
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      // let that = this
+      this.$customAxios
+        .get("wpNewBoard/getProdSumRate", {
+          params: {
+            projYardId: this.$cookies.get("board_yardId")
+          }
+        })
+        .then(resq => {
+          let datas = resq.data;
+
+          this.setEcharts(datas);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    // 生成echarts
+    setEcharts(datas) {
+      let arrX = [];
+      let planCntList = [];
+      let actCntList = [];
+      let unComplateList = [];
+      let unComplateListColor = [];
+      datas.forEach(function(item) {
+        arrX.push(`${item.makeM}月`);
+        let unComplate = Number(item.planCnt) - Number(item.actCnt);
+        planCntList.push(item.planCnt);
+        actCntList.push(item.actCnt);
+        unComplateList.push(unComplate > 0 ? unComplate : item.actCnt);
+        unComplateListColor.push(unComplate > 0 ? "#FF0000" : "#00FF42");
+      });
+      this.$echarts.init(document.querySelector(".item-echart")).setOption({
+        color: ["#FFE000"],
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow"
+          }
+        },
+        calculable: true,
+        grid: {
+          top: 20,
+          bottom: 25,
+          left: 40,
+          right: 20
+        },
+        yAxis: [
+          {
+            type: "category",
+            axisTick: {
+              show: false
+            },
+            data: arrX,
+            axisLabel: {
+              textStyle: {
+                color: "#2E3B46"
+              }
+            }
+          }
+        ],
+        xAxis: [
+          {
+            type: "value",
+            axisLabel: {
+              textStyle: {
+                color: "#2E3B46"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            type: "bar",
+            barGap: 0,
+            barGap: "40%",
+            barWidth: 10, //柱图宽度
+            data: planCntList,
+            label: {
+              show: true,
+              position: "right",
+              distance: 4,
+              color: "#666666"
+            }
+          },
+          {
+            type: "bar",
+            barWidth: 10, //柱图宽度
+            data: actCntList,
+            label: {
+              show: true,
+              position: "right",
+              distance: 4,
+              color: "#666666"
+            },
+            itemStyle: {
+              normal: {
+                color: function(params) {
+                  var colorList = unComplateListColor;
+                  return colorList[params.dataIndex];
+                }
+              }
+            }
+          }
+        ]
+      });
+
+      this.loading = false;
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.mobile-item4 {
+  position: relative;
+  .item-right {
+    .graphics {
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+
+      &.left {
+        background: #ffe000;
+      }
+      &.middle {
+        background: #00ff42;
+      }
+      &.right {
+        background: #ff0000;
+      }
+    }
+    .title4 {
+      font-family: PingFangSC-Regular;
+      color: #2e3b46;
+      padding-right: 0.8rem;
+    }
+  }
+  .item-echart {
+    height: 22rem;
+  }
+}
+</style>
+

@@ -1,0 +1,324 @@
+<!-- 登陆模块 -->
+<template>
+<div class="login-bg">
+  <div class="form-content" :style="{background}">
+    <div class="center-box" :style="bgShow?'width:50rem;height: 25rem;':'width:75%;height:15rem;'">
+      <img class="image" v-if="bgShow" src="./img/camera.png" />
+      <div class="login-wrap" :style="bgShow?'width:50%':'width:100%'">
+        <!-- 登录模块 -->
+        <el-form  class="login-form" autoComplete="on" :model="loginForm" ref="loginForm" :style="bgShow?'width: 60%;margin: 3rem auto;':'width: 11rem;margin:auto;'">
+
+          <p class="form-title primary-color-white">登录</p>
+          <el-form-item class="input-wrap grid-list border primary-color-bg-white">
+            <div class="grid-list-item input-icon">
+              <span class="icon user-icon grid-list-item"></span>
+            </div>
+            <div class="grid-list-item input-item">
+              <el-input type="text" v-model="loginForm.userId" autoComplete="on" placeholder="账号" class="user" />
+            </div>
+          </el-form-item>
+          <el-form-item prop="password" class="input-wrap grid-list border primary-color-bg-white">
+            <div class="grid-list-item input-icon">
+              <span class="icon password-icon grid-list-item"></span>
+            </div>
+            <div class="grid-list-item">
+              <el-input name="password" type="password" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on" placeholder="密码" class="user" />
+            </div>
+
+          </el-form-item>
+
+          <el-form-item class="pass-item">
+            <div style="text-align:left;">
+              <el-checkbox v-model="checked" class="remember" style="color:white;margin:0">记住密码</el-checkbox>
+            </div>
+          </el-form-item>
+
+          <el-form-item>
+            <el-button type="primary" style="" :loading="loading" @click.native.prevent="handleLogin" class="login">登录</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+import md5 from "md5";
+import loginpng from "./img/bg.png";
+
+export default {
+  data() {
+    return {
+      loading: false,
+      loginForm: {
+        userId: this.$cookies.getJSON("wb_userId") || "",
+        password: this.$cookies.getJSON("wb_password") || "",
+        verifyCode: ""
+      },
+      checked: true, // 是否记住密码
+      background: `url(${loginpng}) no-repeat center center`,
+      codeImg: "",
+      temp: {},
+      bgShow: true
+      // status: false
+    };
+  },
+  created() {
+    if (
+      /Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)
+    ) {
+      this.bgShow = false;
+    }
+  },
+  methods: {
+    // 登录
+    handleLogin() {
+      if (!this.loginForm.userId || !this.loginForm.password) {
+        this.$Notification.error({
+          title: "错误",
+          message: "帐号或密码不能为空！"
+        });
+        return;
+      }
+      this.loading = true;
+      let url = "";
+      let password = !this.$utils.isNull(this.$cookies.getJSON("wb_password"))
+        ? this.loginForm.password
+        : md5(this.loginForm.password);
+
+      // TODO: 一般不放在url上
+      this.$customAxios
+        .post(`/api/login?userId=${this.loginForm.userId}&password=${password}`)
+        .then(resq => {
+          this.loading = false;
+          this.$Notification({
+            title: "成功",
+            message: `登录成功！`,
+            type: "success"
+          });
+
+          this.$cookies.set("wb_userInfo", resq, 7);
+          //缓存
+          if (!!this.checked) {
+            this.$cookies.set("wb_userId", this.loginForm.userId, 7);
+            this.$cookies.set("wb_password", password, 7);
+          } else {
+            this.$cookies.remove("wb_userId");
+            this.$cookies.remove("wb_password");
+          }
+          window.location.href = "./board.html";
+        })
+        .catch(error => {
+          this.callOf();
+        });
+    },
+    // 清除数据
+    callOf() {
+      this.loading = false;
+      this.loginForm = {};
+      this.$cookies.remove("wb_userId");
+      this.$cookies.remove("wb_password");
+    }
+  }
+};
+</script>
+
+<style rel="stylesheet/scss" lang="scss">
+$bg: #ffffff;
+$dark_gray: #889aa4;
+$light_gray: #333;
+$color_b: #aefefe;
+
+#login {
+  width: 100%;
+  height: 100%;
+}
+
+.login-bg {
+  width: 100%;
+  height: 100%;
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+    -webkit-text-fill-color: #333 !important;
+  }
+
+  .form-content {
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    text-align: center;
+    clear: both;
+
+    // justify-content:flex-end;
+    .center-box {
+      display: inline-block;
+
+      @include verHorCenter;
+      .image {
+        width: 50%;
+        height: 100%;
+      }
+
+      .login-select {
+        div {
+          width: 50%;
+        }
+      }
+    }
+  }
+  .login-wrap {
+    position: relative;
+    height: 100%;
+    width: 50%;
+    float: right;
+
+    background-color: #0d1433;
+
+    z-index: 0;
+    .login-select {
+      width: 20rem;
+      position: absolute;
+      top: 8rem;
+      left: 5rem;
+      height: 5rem;
+    }
+    .form-back {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+    .login-form {
+      position: relative;
+
+      box-sizing: border-box;
+      z-index: 4;
+
+      .form-title {
+        padding-bottom: 2rem;
+        padding-top: 1rem;
+      }
+
+      p {
+        font-family: PingFangSC-Regular;
+        font-size: 1.3rem;
+        // font-weight:normal;
+        text-align: center;
+        margin: 0;
+        letter-spacing: -1.2px;
+      }
+      .el-form-item {
+        border: 0;
+        margin-bottom: 0.5rem;
+        .el-form-item__content {
+          line-height: 0.5rem;
+          input {
+            height: 1.4rem;
+
+            border: none;
+          }
+        }
+      }
+      .input-wrap {
+        width: 100%;
+        height: 1.5rem;
+        .input-icon {
+          width: 15%;
+          position: relative;
+          text-align: center;
+          padding-left: 0.3rem;
+        }
+        .icon {
+          display: inline-block;
+          width: 1.1rem;
+          height: 1.1rem;
+          &.user-icon {
+            background: url("./img/user.png") no-repeat;
+            background-size: 100% 100%;
+          }
+          &.password-icon {
+            background: url("./img/psw.png") no-repeat;
+            background-size: 100% 100%;
+          }
+        }
+      }
+      .pass-item {
+        padding: 0.3rem 0;
+      }
+      .el-row {
+        .el-checkbox__inner {
+          border: 0;
+        }
+      }
+    }
+  }
+
+  .login-bg .form-content .center-box .login-form .el-form-item .user {
+    // background-image: url('./user.png');
+    // background-repeat: no-repeat; /*设置图片不重复*/
+    // background-position: 9px 2px; /*图片显示的位置*/
+    position: relative;
+  }
+
+  input {
+    background: $bg;
+    border: 0;
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding: 0.6rem 0.25rem 0.6rem 0.1rem;
+    color: $light_gray;
+    height: 2.5rem;
+  }
+  .show-pwd {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.35rem;
+    font-size: 0.8rem;
+    color: $dark_gray;
+    cursor: pointer;
+  }
+  .remember {
+    margin: 0 0 1.75rem;
+  }
+  .el-checkbox__label {
+    color: #fff;
+    font-weight: normal;
+  }
+  .login {
+    width: 100%;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    opacity: 0.83;
+    background-color: #3c4274;
+    border-color: #3c4274;
+    color: #fff;
+    border-radius: 0;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+  }
+
+  .el-button--text {
+    float: right;
+    padding: 0;
+    font-size: 0.8rem;
+    color: $color_b;
+  }
+}
+
+.login-footer {
+  .login-footer-item1 {
+    text-align: center;
+    padding: 3% 0;
+    font-size: 0.7rem;
+    color: #999;
+  }
+}
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+</style>

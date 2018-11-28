@@ -1,0 +1,159 @@
+<template>
+<div id="Board-wrap">
+  <Header></Header>
+  <div class="wrap primary-color-white">
+    <el-row class="center-line">
+      <Item0></Item0>
+      <Item9></Item9>
+      <Item2></Item2>
+
+    </el-row>
+    <el-row class="center-line">
+      <Item11></Item11>
+      <Item4></Item4>
+      <Item10></Item10>
+
+    </el-row>
+    <!-- <el-row class="center-line">
+      <Item6></Item6>
+      <Item7></Item7>
+      <Item8></Item8>
+    </el-row> -->
+
+    <!-- <el-row class="center-line">
+      <Item0></Item0>
+      <Item1></Item1>
+      <Item2></Item2>
+
+    </el-row>
+    <el-row class="center-line">
+      <Item3></Item3>
+      <Item4></Item4>
+      <Item5></Item5>
+
+    </el-row>
+    <el-row class="center-line">
+      <Item6></Item6>
+      <Item7></Item7>
+      <Item8></Item8>
+    </el-row> -->
+
+  </div>
+</div>
+</template>
+
+<script>
+import Header from "@/views/Board/header";
+import Item0 from "@/views/Board/item0";
+import Item1 from "@/views/Board/item1";
+import Item2 from "@/views/Board/item2";
+import Item3 from "@/views/Board/item3";
+import Item4 from "@/views/Board/item4";
+import Item5 from "@/views/Board/item5";
+import Item6 from "@/views/Board/item6";
+import Item7 from "@/views/Board/item7";
+import Item8 from "@/views/Board/item8";
+import Item9 from "@/views/Board/item9";
+import Item10 from "@/views/Board/item10";
+import Item11 from "@/views/Board/item11";
+
+export default {
+  name: "Board",
+  components: {
+    Header,
+    Item0,
+    Item1,
+    Item2,
+    Item3,
+    Item4,
+    Item5,
+    Item6,
+    Item7,
+    Item8,
+    Item9,
+    Item10,
+    Item11
+  },
+  mounted() {
+    this.setTimeOut();
+  },
+  methods: {
+    // 倒计时
+    setTimeOut() {
+      let times = 60 * 10; //十分钟后刷新页面
+      let timeObj = setInterval(function() {
+        times = times - 1; // 倒计时
+        if (times === 0) {
+          clearInterval(timeObj);
+
+          window.location.reload();
+        }
+      }, 1000);
+    }
+  }
+};
+</script>
+
+<style rel="stylesheet/scss" lang="scss">
+#Board {
+  height: 100%;
+  width: 100%;
+}
+#Board-wrap {
+  height: 100%;
+}
+.wrap {
+  height: calc(100% - 5.5rem);
+  .center-line {
+    height: 49%;
+    // height: 32%;
+  }
+}
+
+.center-wrap {
+  position: relative;
+  height: calc(100% - 3.7rem);
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+.line-item {
+  position: relative;
+  height: 98%;
+  width: 32% !important;
+  margin-right: 1%;
+  margin-bottom: 1%;
+  background: url("../../assets/board_item_bg.png") no-repeat;
+  background-size: 100% 100%;
+  .title {
+    line-height: 2.3rem;
+    // background: yellow;
+    position: relative;
+    .title-name {
+      // position: absolute;
+      padding-left: 2.7rem;
+      font-family: PingFangSC-Semibold;
+      font-size: 1.1rem;
+      color: #32ffd8;
+      display: inline-block;
+      // line-height: 2.5rem;
+      // padding-left: 2.5rem;
+      // background-color: #407197;
+      // padding: 0.5rem 0.25rem;
+      box-sizing: border-box;
+
+      // border: 1px solid #407197;
+    }
+    .title-sanjiao {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      /* left: 0px; */
+      height: 0;
+      width: 0;
+      border-color: #407197 transparent;
+      border-width: 1.7rem 1.05rem 0 0;
+      border-style: solid;
+    }
+  }
+}
+</style>

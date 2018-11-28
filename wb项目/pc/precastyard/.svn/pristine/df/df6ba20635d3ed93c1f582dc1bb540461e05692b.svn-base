@@ -1,0 +1,187 @@
+<!-- Item0模板 -->
+<template>
+<el-col :span="8" class="line-item item0" v-loading="loading">
+  <!-- <div class="wrap center-bottom-wrap"> -->
+    <div class="title">
+      <div class="title-name">
+        制梁进度
+      </div>
+      <!-- <div class="title-sanjiao">
+      </div> -->
+    </div>
+    <div class="item-center center-wrap  font-size-16">
+      <div class="item">
+        <p class="item-top grid-list">
+          <span class="top-left grid-list-item">
+          <span>当日计划产量(片)：</span>
+          <span class="count">{{dayPlanCnt}}</span>
+          </span>
+          <span class="top-right grid-list-item">
+         <span>当日完成量(片)：</span>
+          <span class="count">{{dayActCnt}}</span>
+          </span>
+        </p>
+        <p class="item-bottom">
+          <span class="fill-bg bg1" :style="{width:''+dayRate+'%'}"></span>
+          <span class="title-item0 font-size-16">完成进度：<span class="count">{{dayRate}}%</span></span>
+
+        </p>
+      </div>
+      <div class="item">
+        <p class="item-top grid-list">
+          <span class="top-left grid-list-item">
+          <span>本月计划生产量(片)：</span>
+          <span class="count">{{monthPlanCnt}}</span>
+          </span>
+          <span class="top-right grid-list-item">
+         <span>本月完成量(片)：</span>
+          <span class="count">{{monthActCnt}}</span>
+          </span>
+        </p>
+        <p class="item-bottom">
+          <span class="fill-bg bg2" 
+          :class="monthRate>20?'bg22':''"
+          :style="{width:''+monthRate+'%'}"
+          
+          ></span>
+          <span class="title-item0 font-size-16">完成进度：<span class="count">{{monthRate}}%</span></span>
+        </p>
+      </div>
+      <div class="item">
+        <p class="item-top grid-list">
+          <span class="top-left grid-list-item">
+          <span>设计总量(片)：</span>
+          <span class="count">{{planProdCnt}}</span>
+          </span>
+          <span class="top-right grid-list-item">
+         <span>累计产量(片)：</span>
+          <span class="count">{{actProdCnt}}</span>
+          </span>
+        </p>
+        <p class="item-bottom">
+          <span class="fill-bg bg3" :style="{width:''+prodRate+'%'}"></span>
+          <span class="title-item0 font-size-16">完成进度：<span class="count">{{prodRate}}%</span></span>
+        </p>
+      </div>
+    <!-- </div> -->
+  </div>
+</el-col>
+</template>
+
+<script>
+import getData from "./_data";
+export default {
+  data() {
+    return {
+      loading: true,
+      dayPlanCnt: "",
+      dayActCnt: "",
+      dayRate: "",
+      monthPlanCnt: "",
+      monthActCnt: "",
+      monthRate: "",
+      yearPlanCnt: "",
+      yearActCnt: "",
+      yearRate: "",
+      planProdCnt: "",
+      actProdCnt: "",
+      prodRate: ""
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      this.$customAxios
+        .get("/wpNewBoard/getMKRate", {
+          params: {
+            projYardId: this.$cookies.get("board_yardId"),
+            makeDate: this.$moment(new Date()).format("YYYY-MM-DD"),
+            makeM: this.$moment(new Date()).format("M"),
+            makeY: this.$moment(new Date()).format("YYYY")
+          }
+        })
+        .then(resq => {
+          let datas = resq.data;
+          this.dayPlanCnt = datas.dayPlanCnt;
+          this.dayActCnt = datas.dayActCnt;
+          this.dayRate = datas.dayRate;
+          this.monthPlanCnt = datas.monthPlanCnt;
+          this.monthActCnt = datas.monthActCnt;
+          this.monthRate = datas.monthRate;
+          this.yearPlanCnt = datas.yearPlanCnt;
+          this.yearActCnt = datas.yearActCnt;
+          this.yearRate = datas.yearRate;
+
+          this.planProdCnt = datas.planProdCnt;
+          this.actProdCnt = datas.actProdCnt;
+          this.prodRate = datas.prodRate;
+
+          this.loading = false;
+        })
+        .catch(error => {});
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.item-center {
+  padding: 1rem !important;
+  .item {
+    padding-bottom: 1rem;
+    .item-top {
+      padding-top: 0.5rem;
+      padding-bottom: 0.6rem;
+      .top-left {
+        width: 50%;
+        text-align: left;
+      }
+      .count {
+        color: #ffe000;
+      }
+      .top-right {
+        text-align: right;
+      }
+    }
+    .item-bottom {
+      position: relative;
+      width: 100%;
+      height: 1.5rem;
+      background: #2d2f48;
+      .title-item0 {
+        font-family: PingFangSC-Regular;
+        color: #fff;
+        position: absolute;
+        top: 0.3rem;
+        left: 0.5rem;
+        vertical-align: middle;
+        .count {
+          font-family: Impact;
+        }
+      }
+
+      .fill-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+
+        &.bg1 {
+          background: #f47b00;
+        }
+        &.bg2 {
+          background: #00cd06;
+        }
+        &.bg22 {
+          background: #0081ff;
+        }
+        &.bg3 {
+          background: #f47b00;
+        }
+      }
+    }
+  }
+}
+</style>

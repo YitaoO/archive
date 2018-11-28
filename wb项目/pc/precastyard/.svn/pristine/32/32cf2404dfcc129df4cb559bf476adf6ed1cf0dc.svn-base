@@ -1,0 +1,72 @@
+<!-- item10模板 -->
+<template>
+<el-col :span="8" class="line-item item8">
+  <div class="title">
+    <div class="title-name">
+      生产照片
+    </div>
+    <!-- <div class="title-sanjiao"></div> -->
+  </div>
+  <div class="center-wrap ">
+    <el-carousel class="wrap">
+      <el-carousel-item v-for="item in 6" :key="item">
+        <!-- <h3>{{ item }}</h3> -->
+      </el-carousel-item>
+    </el-carousel>
+  </div>
+
+
+</el-col>
+</template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  methods: {},
+  computed: {}
+};
+</script>
+
+<style lang="scss">
+.item8 {
+  .center-wrap {
+    padding: 1rem;
+    .item-wrap {
+      height: 100%;
+
+      //到时多张图片时把这行代码去掉
+      margin-top: 5rem;
+    }
+    .pic-wrap {
+      height: 48%;
+      padding-bottom: 1%;
+
+      .item-pic {
+        height: 100%;
+      }
+    }
+  }
+  .wrap {
+    height: 100%;
+    border: 1px solid #32ffd9;
+    box-shadow: inset 0 0 20px 0 rgba(50, 255, 217, 0.1);
+  }
+}
+.el-carousel__container{
+  height: 100% !important;
+  overflow: hidden !important;
+}
+.el-carousel__item:nth-child(2n + 1) {
+  background: url('../../assets/test_photo_01.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.el-carousel__item:nth-child(2n) {
+  background: url('../../assets/test_photo_02.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.el-carousel__button {
+  width: 20px !important;
+}
+</style>

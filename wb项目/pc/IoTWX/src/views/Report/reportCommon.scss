@@ -1,0 +1,494 @@
+/* ------------------------------------------------------------
+   统计-头部
+------------------------------------------------------------ */
+.tempcol2 {
+  background-color: #ffffff;
+  border: 1px solid rgb(220, 223, 225);
+  // 搜索框右边
+  .search {
+    margin-right: 12px;
+    height: 69px;
+    line-height: 69px;
+    float: right;
+    // 输入框
+    .el-input {
+      width: 200px;
+
+      .el-input__inner {
+        height: 35px;
+      }
+
+      .el-input-group__append {
+        background-color: #fff;
+      }
+    }
+    // 按钮
+    .el-button {
+      height: 35px;
+      padding: 9px 15px;
+    }
+    // .rolePermissionButton {
+    //   height: 69px;
+    //   display:-moz-inline-box; /* css注释：for ff2 */
+    //   display:inline-block;  // 把span变成block，inline-block是不换行，block是换行
+    //   font-size: 0px; // 去掉block之间的白色间隔，大约是4px
+    //   letter-spacing: -4px; // 根据不同字体字号或许需要做一定的调整
+    //   .el-button {
+    //     height: 69px;
+    //     width: 96px;
+    //     border-radius: 0px;
+    //     margin: 0px;
+    //     border: {
+    //       right: none;
+    //       bottom: none;
+    //       top: none;
+    //       left: 1px solid rgb(220, 223, 225);
+    //     }
+    //   }
+    // }
+  }
+  // 左边的自定义下拉框
+  .tempSelect {
+    .el-input .el-input__inner {
+      width: 140px;
+      height: 69px;
+      color: #17b990;
+      font-family: PingFang-SC-Medium;
+      border-top-style: none;
+      border-right: 1px solid rgb(220, 223, 230);
+      border-bottom-style: none;
+      border-left-style: none;
+      border-radius: 0;
+    }
+  }
+  // 右边的其他下拉框
+  .el-dropdown {
+    width: 84px;
+
+    .el-button--primary {
+      height: 69px;
+      background-color: transparent !important;
+      color: black;
+      // border: 0;
+      border-top-style: none;
+      border-right-style: none;
+      border-bottom-style: none;
+      border-left-color: rgb(220, 223, 225) !important;
+      border-left-style: solid;
+      border-left-width: 1px;
+      border-radius: 0;
+    }
+  }
+}
+
+.tempcol3 {
+  background-color: #ffffff;
+  border: 1px solid rgb(220, 223, 225);
+  border-top: none;
+
+  .el-form {
+    margin: 10px;
+
+    .el-form-item {
+      margin-bottom: 0;
+      // 输入框
+      .el-input {
+        .el-input__inner {
+          height: 35px;
+        }
+      }
+    }
+
+    .el-button {
+      width: 75px;
+      height: 35px;
+      padding: 0;
+    }
+
+    .el-button--success {
+      background: #17b990;
+      border-color: #17b990;
+
+      &:hover {
+        background-color: #589685;
+        border-color: #589685;
+      }
+    }
+  }
+}
+
+.alramHistoryPic,
+.humidityHistory,
+.temperatureHistory {
+  padding: 10px;
+  height: 500px;
+  background-color: #ffffff;
+  border: 1px solid rgb(220, 223, 225);
+}
+/* ------------------------------------------------------------
+   设置表单form
+------------------------------------------------------------ */
+.area {
+  background-color: #ffffff;
+  border: 1px solid #dcdfe1;
+
+  p {
+    height: 46px;
+    line-height: 46px;
+    padding-left: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #dcdfe1;
+    margin-bottom: 25px;
+  }
+
+  .row1 {
+    border-bottom: 1px dashed rgb(220, 223, 225);
+  }
+
+  .row2 {
+    margin-top: 18px;
+
+    .el-form-item {
+      margin-bottom: 20px;
+    }
+  }
+
+  .el-row {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+
+  button {
+    margin-top: 21px;
+    margin-bottom: 21px;
+    height: 28px;
+    width: 50px;
+    padding: 0;
+  }
+
+  .el-date-editor {
+    width: 100%;
+  }
+
+  .el-input-number {
+    width: 90%;
+  }
+
+  .personalized {
+    border-bottom: 1px dashed rgb(220, 223, 225);
+    border-top: 1px dashed rgb(220, 223, 225);
+    margin-bottom: 15px;
+    padding-top: 15px;
+  }
+}
+/* ------------------------------------------------------------
+   组件
+------------------------------------------------------------ */
+.elselection {
+  width: 100%;
+}
+// 角色、分组的option样式
+
+.selectOption {
+  .icon-left {
+    width: 15px;
+    height: 15px;
+
+    &.icon-setting-person {
+      @include showGlobalImage('setting-person-active');
+    }
+
+    &.icon-setting-group {
+      @include showGlobalImage('setting-group-active');
+    }
+  }
+}
+// 主页是table的都可以用这个实现table的自适应高宽度
+.first {
+  height: 100%;
+  .history {
+    height: calc(100% - 81px - 61px);
+    .el-table {
+      width: 100%;
+      border: 1px solid rgb(220, 223, 225);
+      border-bottom: none;
+    }
+  }
+}
+
+.first, .baseDeviceSet .elrow, .elrow {
+  // 分页组件的样式
+  #pagination {
+    border: {
+      right: 1px solid rgb(220, 223, 225);
+      bottom: 1px solid rgb(220, 223, 225);
+      left: 1px solid rgb(220, 223, 225);
+    }
+    height: 60px;
+    background-color: #fff;
+    display: -webkit-flex;
+    justify-content: flex-end; //子元素水平居中
+    align-items: center; //子元素垂直居中
+    // align-self: center; 使用每个弹性对象元素的 align-self 属性可重写 align-items 属性
+  }
+}
+
+// tag标签
+.el-table {
+  .el-table__body-wrapper {
+    // margin: 0px 10px;
+    // width: calc(100% - 20px);
+    td {
+      padding: 8px 0;
+    }
+  }
+
+  .el-table__header-wrapper {
+    border-bottom: 1px solid #ebeef5;
+
+    table {
+      // padding: 0 10px;
+      th {
+        padding-bottom: 13px;
+        padding-top: 29px;
+        border-bottom-width: 0;
+
+        .cell {
+          height: 14px;
+          line-height: 14px;
+        }
+      }
+    }
+  }
+
+  td {
+    padding: 9px 0;
+  }
+
+  .el-tag {
+    width: 42px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 4px;
+    border: 0;
+    text-align: center;
+    padding: 0;
+
+    &.el-tag--success {
+      background-color: #17b990;
+      color: #fff;
+    }
+
+    &.el-tag--gray {
+      background-color: #909399;
+      color: #fff;
+    }
+
+    &.el-tag--danger {
+      background-color: #fd7762;
+      color: #fff;
+    }
+
+    &.el-tag--warning {
+      background-color: #facc58;
+      color: #fff;
+    }
+
+    &.el-tag--primary {
+      background-color: #6aa8ef;
+      color: #fff;
+    }
+  }
+
+  .el-button--success.is-plain {
+    color: #17b990;
+    background: #fff;
+    border-color: #17b990;
+
+    &:hover {
+      background-color: #17b990;
+      color: #fff;
+    }
+  }
+
+  .el-button--danger.is-plain {
+    color: #ef4343;
+    background: #fff;
+    border-color: #ef4343;
+
+    &:hover {
+      background-color: #ef4343;
+      color: #fff;
+    }
+  }
+
+  .el-button--primary.is-plain {
+    color: #6aa8ef;
+    background: #fff;
+    border-color: #6aa8ef;
+
+    &:hover {
+      background-color: #6aa8ef;
+      color: #fff;
+    }
+  }
+
+  .el-button--warning.is-plain {
+    color: #ffc000;
+    background: #fff;
+    border-color: #ffc000;
+
+    &:hover {
+      background-color: #ffc000;
+      color: #fff;
+    }
+  }
+
+  .el-button {
+    margin: 0;
+  }
+
+  .el-dropdown {
+    .el-button--primary {
+      background-color: transparent !important;
+      color: #17b990;
+      border: 0;
+      padding: 9px;
+      // border-top-style: none;
+      // border-right-style: none;
+      // border-bottom-style: none;
+      // border-left-color: rgb(220, 223, 225) !important;
+      // border-left-style: solid;
+      // border-left-width: 1px;
+      // border-radius: 0
+    }
+  }
+
+  .handleButton {
+    padding: 3px 10px 3px 6px;
+    margin: 0;
+    border-radius: 0;
+    border-right: 1px solid rgb(220, 223, 225);
+
+    span {
+      width: 28px;
+      height: 14px;
+    }
+
+    &:hover {
+      border-right: 1px solid rgb(220, 223, 225);
+    }
+
+    &.handleNoMore {
+      border-right: none !important;
+    }
+  }
+}
+
+.el-dialog {
+  width: 445px;
+
+  .el-dialog__header {
+    background-color: #17b990;
+
+    .el-dialog__title {
+      font-size: 16px;
+      color: #ffffff;
+    }
+
+    .el-dialog__headerbtn .el-dialog__close {
+      color: #ffffff;
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .el-dialog__footer {
+    text-align: center;
+    padding: 13px 0 16px;
+
+    .el-button {
+      border-radius: 0;
+      height: 30px;
+      padding: {
+        top: 7px;
+        bottom: 7px;
+      }
+    }
+  }
+
+  .el-dialog__body {
+    .el-form-item {
+      .el-form-item__error {
+        padding: 0;
+      }
+
+      .el-input .el-input__inner {
+        border-radius: 0;
+        height: 35px;
+      }
+    }
+  }
+}
+// 告警设置的form
+.baseAlarmSetForm {
+  .el-dialog__body {
+    padding: 5px 0;
+
+    .el-form-item {
+      margin-bottom: 0;
+      border-bottom: 1px solid #f5f8fa;
+      padding: 17px 20px;
+    }
+  }
+}
+
+.personManagementForm {
+  .el-dialog__body {
+    padding: 18px 0 0;
+
+    .el-form-item {
+      padding-right: 15px;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.rolePermissionForm {
+  .el-dialog__body {
+    padding: 0;
+
+    .el-form-item {
+      margin-bottom: 0;
+      padding: 21px 15px 21px 0;
+      border-bottom: 1px solid #f5f8fa;
+    }
+  }
+}
+
+
+// table tree
+.ms-tree-space {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  width: 14px;
+  height: 14px;
+  // margin-left:1em;
+}
+.ms-tree-space::before {
+  content: "";
+}
+table td {
+  line-height: 26px;
+}
+
+// 改变tree-grid的箭头样式，防止它的padding过大，影响当行行高
+.tabletree .treebutton {
+  padding: 7px 0;
+}

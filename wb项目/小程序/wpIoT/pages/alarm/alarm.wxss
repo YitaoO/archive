@@ -1,0 +1,48 @@
+
+@import "../../components/PullRefresh/pullPefressUp.wxss";
+
+.alarm-top{
+  line-height: 80rpx;
+  color: #ccc;
+  font-size: 14px;
+  background-color:#fff;
+  border:1px solid #ccc;
+  padding-bottom:5px;
+  text-align:center;
+  position:fixed;
+  top:0;
+  width:100%;
+
+}
+
+.alarm-conter{
+  background-color:#fff;
+  border-bottom: 1px solid #ccc;
+
+}
+.list-wrap{
+  margin-top:100rpx;
+}
+
+.navigator-hover{
+  color: #3CB371;
+  background-color: white;
+  position: relative;
+}
+
+.navigator-hover::before{
+  content:"";
+  position: absolute;
+  bottom: -10rpx;
+  left: 30%;
+  width: 50rpx;
+  height: 6rpx;
+  background-color: #3CB371;
+}
+
+.xinxi{
+  color:#ccc;
+  text-align:center;
+  padding:20rpx 0;
+  font-size: 14px;
+}

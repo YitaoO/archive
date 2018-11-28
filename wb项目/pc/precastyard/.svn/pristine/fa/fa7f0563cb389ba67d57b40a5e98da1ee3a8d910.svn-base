@@ -1,0 +1,86 @@
+
+<template>
+<div class="mobile-item5">
+  <Title :index=5></Title>
+  <div class="item">
+    <div class="item6-center center-wrap">
+    <vue-seamless-scroll :data="list" class="scroll-list">
+      <ul>
+        <li class="item" v-for="(item,index) in list" :key="index">
+          <span>{{item.profile}}</span>
+        </li>
+      </ul>
+    </vue-seamless-scroll>
+  </div>
+  </div>    
+</div>
+
+</template>
+
+<script>
+import Title from "./title";
+
+export default {
+  components: {
+    Title
+  },
+  data() {
+    return {
+      loading: true,
+      list: []
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  computed: {
+    classOption() {
+      return {
+        step: 0.1,
+        waitTime: 4500,
+        limitMoveNum: 3
+      };
+    }
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      this.$customAxios
+        .get("/wpNewBoard/getMKInfo", {
+          params: {
+            projYardId: this.$cookies.get("board_yardId")
+          }
+        })
+        .then(resq => {
+          this.list = resq.data;
+
+          this.loading = false;
+        })
+        .catch(error => {});
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.mobile-item5 {
+  font-family: PingFangSC-Regular;
+
+  p {
+    padding-bottom: 0.8rem;
+  }
+  .item {
+    width: 100%;
+    padding-bottom: 0.5rem;
+    line-height: 1.2rem;
+    .warm {
+      color: red;
+    }
+  }
+  .scroll-list {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+</style>
+

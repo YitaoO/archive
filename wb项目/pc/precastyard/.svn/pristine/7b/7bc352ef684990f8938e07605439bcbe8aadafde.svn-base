@@ -1,0 +1,249 @@
+<!-- Item2模板 -->
+<template>
+<div class="line-item item2" v-loading="loading">
+  <Title :index=5 class="title-wrap-5"></Title>
+  <div class="title-des des">
+    <!-- <span class="graphics left"></span>
+    <span class="title2">已完成</span> -->
+
+    <span class="icon line" :style="iconLine"></span>
+    <span class="name">完成率(%)</span>
+    <span class="icon square all"></span>
+    <span class="name">>80%</span>
+    <span class="icon square middle"></span>
+    <span class="name">>50%</span>
+    <span class="icon square low"></span>
+    <span class="name"><50%</span>
+    <span class="name">已完成</span>
+  </div>
+  <!-- <div class="item-right">
+    <span class="graphics left"></span>
+    <span class="title2">已完成</span>
+
+    <span class="graphics middle"></span>
+    <span class="title2">完成率(%)</span>
+
+  </div> -->
+  <div class="item-scale center-wrap" v-if="!noData"></div>
+  <div class="noData" v-if="noData">暂无数据...</div>
+
+</div>
+</template>
+
+<script>
+import Title from "./title";
+import iconLine from "../../assets/echart_line_icon.png";
+export default {
+  components: {
+    Title
+  },
+  data() {
+    return {
+      loading: true,
+      noData: false,
+      iconLine: {
+        background: `url(${iconLine}) no-repeat`,
+        backgroundSize: "100% 100%"
+      }
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      // let that = this
+      this.$customAxios
+        .get("/wpNewBoard/getBridgeSetupRate", {
+          params: {
+            projYardId: this.$cookies.get("board_yardId")
+          }
+        })
+        .then(resq => {
+          if (resq.data.length == 0) {
+            this.loading = false;
+            this.noData = true;
+
+            return;
+          }
+          this.setEcharts(resq.data);
+        })
+        .catch(error => {
+          // this.loading = false;
+        });
+    },
+    // 生成echarts
+    setEcharts(list) {
+      let nameList = [];
+      let ValueRate = [];
+      let actCntList = [];
+      let planCntList = [];
+      let colorList = [];
+      list.forEach(item => {
+        let rate = (item.actCnt / item.planCnt).toFixed(2) * 100;
+        nameList.push(item.bridgeName);
+        actCntList.push(item.actCnt);
+        planCntList.push(item.planCnt);
+        ValueRate.push(rate.toFixed(0));
+        colorList.push(
+          rate < 50 ? "#FF2727" : rate > 80 ? "#FFFE00" : " #FF2727"
+        );
+      });
+
+      this.$echarts.init(document.querySelector(".item-scale")).setOption({
+        grid: {
+          top: 20,
+          left: 45,
+          right: 45,
+          bottom: 40
+        },
+        toolbox: {
+          show: false
+        },
+        xAxis: {
+          type: "category",
+          top: 4,
+          data: nameList,
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+              opacity: 0.5
+            }
+          },
+          axisLabel: {
+            interval: 0,
+            rotate: 50,
+            margin: 5,
+            textStyle: {
+              color: "#fff"
+            }
+          }
+        },
+        yAxis: [
+          {
+            type: "value",
+            axisLine: {
+              lineStyle: {
+                color: "#fff",
+                opacity: 0.5
+              }
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: "#fff",
+                opacity: 0.3
+              }
+            }
+          },
+          {
+            type: "value",
+            min: 0,
+            max: 100,
+            splitLine: {
+              show: false
+            },
+            axisLine: {
+              lineStyle: {
+                color: "#fff",
+                opacity: 0.5
+              }
+            },
+            axisLabel: {
+              formatter: "{value} %",
+              textStyle: {
+                color: "#fff"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            data: actCntList,
+            type: "bar",
+            stack: "bar",
+            barWidth: 15, //柱图宽度
+            itemStyle: {
+              color: function(params) {
+                return colorList[params.dataIndex];
+              }
+            }
+          },
+          {
+            data: planCntList,
+            type: "bar",
+            stack: "bar",
+            barWidth: 15, //柱图宽度
+            itemStyle: {
+              normal: {
+                color: "rgba(255,255,255, 0.3)"
+                // barBorderColor: "#FF2727", //边框色
+                // barBorderWidth: 1 //边框宽度
+              }
+            }
+          },
+          {
+            data: ValueRate,
+            type: "line",
+            yAxisIndex: 1,
+            itemStyle: {
+              color: "#FFCB00"
+            },
+            label: {
+              show: false,
+              position: "top",
+              distance: 4,
+              color: "#fff"
+            }
+          }
+        ]
+      });
+      this.loading = false;
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.item2 {
+  font-size: 0.6rem;
+  width: 94%;
+  .des {
+    .icon {
+      display: inline-block;
+      vertical-align: middle;
+      &.line {
+        width: 0.9rem;
+        height: 0.5rem;
+      }
+      &.square {
+        width: 0.5rem;
+        height: 0.5rem;
+      }
+      &.all {
+        background: #00ff65;
+      }
+      &.middle {
+        background: #fffe00;
+      }
+      &.low {
+        background: #ff2727;
+      }
+    }
+    .name {
+      padding-left: 0.3rem;
+      padding-right: 0.3rem;
+    }
+  }
+}
+.title-wrap-5 {
+  .line {
+    bottom: 0.8rem !important;
+  }
+}
+.item-scale {
+  padding: 1.5rem 1rem 0rem 1rem !important;
+  width: 100%;
+}
+</style>

@@ -1,0 +1,11 @@
+/* ================================================================================
+  兼容样式
+================================================================================ */
+//input下移
+.el-input__inner{
+    border-left:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    height:1.5rem !important;
+    line-height:1.5rem !important;
+}

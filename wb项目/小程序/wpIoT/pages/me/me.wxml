@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo grid-list primary-color-bg-white">
+    <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
+    <block>
+      <view class="userinfo-sty grid-list-item">
+        <view class="userinfo-nickname">{{userInfo.name}}</view>
+        <view style="color:#ccc;padding-left:10rpx;pading-top:5rpx;">{{(userInfo.roleName != null)?userInfo.roleName:''}}</view>
+      </view>
+      <view class="userinfo-sty grid-list-item">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </view>
+    </block>
+  </view>
+  <view class="grid-list border-bottom" style="padding:30rpx;background:#fff;">
+    <text class="grid-list-item" style="width:200rpx;">公司名称</text>
+    <text class="grid-list-item" style="margin-left:20rpx;color:#ccc;text-align:right;">{{userInfo.compName}}</text>
+  </view>
+  <view class="grid-list border-bottom" style="padding:30rpx;background:#fff;">
+    <text class="grid-list-item" style="width:200rpx;">手机</text>
+    <text class="grid-list-item" style="margin-left:20rpx;color:#ccc;text-align:right;">{{userInfo.telephone}}</text>
+  </view>
+</view>
+<!-- <view class="usermotto">
+  <text>我的名片</text>
+  <image style="height:60rpx;width:60rpx;vertical-align:middle;" src="../../img/ewm.png" mode="scaleToFill" bindtap="scanCode"></image>
+</view> -->

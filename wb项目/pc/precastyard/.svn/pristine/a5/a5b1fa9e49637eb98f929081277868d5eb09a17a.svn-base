@@ -1,0 +1,164 @@
+<template>
+<div id="Board-wrap">
+  <div class="wrap" v-if="projectList.length>0">
+  <Header :list="projectList"></Header>
+  <div class="lists primary-color-white">
+    <el-row class="center-line">
+      <Item0  class="line-item" :style="listItemBg"></Item0>
+      <Item9 class="line-item" :style="listItemBg"></Item9>
+      <Item2 class="line-item" :style="listItemBg"></Item2>
+
+    </el-row>
+    <el-row class="center-line">
+      <Item11 class="line-item" :style="listItemBg"></Item11>
+      <Item4 class="line-item" :style="listItemBg"></Item4>
+      <Item10 class="line-item" :style="listItemBg"></Item10>
+
+    </el-row>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+import Header from "@/views/Board/header";
+import Item0 from "@/views/Board/item0";
+import Item1 from "@/views/Board/item1";
+import Item2 from "@/views/Board/item2";
+import Item3 from "@/views/Board/item3";
+import Item4 from "@/views/Board/item4";
+import Item6 from "@/views/Board/item6";
+import Item7 from "@/views/Board/item7";
+import Item8 from "@/views/Board/item8";
+import Item9 from "@/views/Board/item9";
+import Item10 from "@/views/Board/item10";
+import Item11 from "@/views/Board/item11";
+import itemBg from "../../assets/item_bg_icon.png";
+
+export default {
+  name: "Board",
+
+  components: {
+    Header,
+    Item0,
+    Item1,
+    Item2,
+    Item3,
+    Item4,
+    Item6,
+    Item7,
+    Item8,
+    Item9,
+    Item10,
+    Item11
+  },
+  data() {
+    return {
+      projectList: [],
+      listItemBg: {
+        background: `url(${itemBg}) no-repeat`,
+        backgroundSize: "100% 100%"
+      }
+    };
+  },
+  mounted() {
+    console.log(document.body.clientHeight);
+
+    this.setTimeOut();
+    this.getData();
+  },
+  methods: {
+    // 倒计时
+    setTimeOut() {
+      let times = 60 * 5; //十分钟后刷新页面
+      let timeObj = setInterval(function() {
+        times = times - 1; // 倒计时
+        if (times === 0) {
+          clearInterval(timeObj);
+
+          window.location.reload();
+        }
+      }, 1000);
+    },
+    // 获取项目列表
+    getData() {
+      let yardId = this.$cookies.get("board_yardId");
+      this.$customAxios
+        .get("wpNewBoard/switchYard")
+        .then(resq => {
+          if (!yardId) {
+            this.$cookies.set("board_yardId", resq.data[0].yardId);
+          }
+
+          this.projectList = resq.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
+};
+</script>
+
+<style rel="stylesheet/scss" lang="scss">
+@import "@/common/style/board/common.scss"; // 引用通用样式
+
+#Board-wrap {
+  height: 100%;
+  background: #0c0f21;
+  overflow: hidden;
+  .wrap {
+    height: 100%;
+    .center-line {
+      height: 49%;
+    }
+    .lists {
+      height: calc(100% - 5rem);
+    }
+  }
+}
+
+.center-wrap {
+  position: relative;
+  height: calc(100% - 3.7rem);
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+.line-item {
+  position: relative;
+  height: 98%;
+  width: 32% !important;
+  margin-right: 1%;
+
+  margin-bottom: 1%;
+
+  background-size: 100% 100%;
+  &.line-item:first-child {
+    margin-left: 1%;
+  }
+  .title {
+    line-height: 2rem;
+    position: relative;
+    .title-name {
+      padding-left: 2.7rem;
+      font-family: PingFangSC-Semibold;
+      font-size: 0.8rem;
+      color: #32ffd8;
+      display: inline-block;
+      box-sizing: border-box;
+      padding-top: 0.2rem;
+    }
+    .title-sanjiao {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      /* left: 0px; */
+      height: 0;
+      width: 0;
+      border-color: #407197 transparent;
+      border-width: 1.7rem 1.05rem 0 0;
+      border-style: solid;
+    }
+  }
+}
+</style>

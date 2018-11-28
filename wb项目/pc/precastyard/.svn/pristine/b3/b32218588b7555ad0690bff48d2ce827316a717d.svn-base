@@ -1,0 +1,137 @@
+<!-- Item0模板 -->
+<template>
+<div class="line-item item0" v-loading="loading">
+  <Title :index=2></Title>
+    
+    <div class="item-center center-wrap">
+      <div class="list" v-for="(item,index) in list" :key="index">
+        <p class="item">
+           <span>{{item.leftName}}</span>
+          <span class="count">{{item.countLeft}}</span>
+        </p>
+        <p class="item">
+           <span>{{item.middleName}}</span>
+          <span class="count">{{item.countMiddle}}</span>
+        </p>
+        <p class="item" :class="item.state ==0?'no-data':item.state ==1?'unfinish':'finish'">
+          <span class="icon" :style='{
+        background: `url(${item.state==0?state0:item.state ==1?state1:state2}) no-repeat`,
+        backgroundSize: "100% 100%"
+      }'></span>
+          <span class="title-right">完成进度:<span class="count">{{item.countRight}}%</span></span>
+        </p>
+      </div>
+  </div>
+  <div class="noData" v-if="noData">暂无数据...</div>
+</div>
+</template>
+
+<script>
+import Title from "./title";
+import getData from "./_data";
+import state0 from "../../assets/item0_state0_icon.png";
+import state1 from "../../assets/item0_state1_icon.png";
+import state2 from "../../assets/item0_state2_icon.png";
+export default {
+  components: {
+    Title
+  },
+  data() {
+    return {
+      loading: true,
+      noData: false,
+      list: [],
+      state0: state0,
+      state1: state1,
+      state2: state2
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      this.$customAxios
+        .get("/wpNewBoard/getMKRate", {
+          params: {
+            projYardId: this.$cookies.get("board_yardId"),
+            makeDate: this.$moment(new Date()).format("YYYY-MM-DD"),
+            makeM: this.$moment(new Date()).format("M"),
+            makeY: this.$moment(new Date()).format("YYYY")
+          }
+        })
+        .then(resq => {
+          let datas = resq.data;
+
+          if (datas.length == 0) {
+            this.loading = false;
+            this.noData = true;
+
+            return;
+          }
+          this.list = [
+            {
+              leftName: "当日计划生产梁数:",
+              middleName: "当日完成梁数:",
+              countLeft: datas.dayPlanCnt,
+              countMiddle: datas.dayActCnt,
+              countRight: datas.dayRate,
+              state: datas.dayRate == 0 ? 0 : datas.dayRate >= 80 ? 2 : 1
+            },
+            {
+              leftName: "本月计划生产梁数:",
+              middleName: "本月完成梁数:",
+              countLeft: datas.monthPlanCnt,
+              countMiddle: datas.monthActCnt,
+              countRight: datas.monthRate,
+              state:
+                datas.monthRate == 0 ? 0 : datas.monthRate == 100 ? state2 : 1
+            },
+            {
+              leftName: "本年计划生产梁数:",
+              middleName: "本年完成梁数:",
+              countLeft: datas.planProdCnt,
+              countMiddle: datas.actProdCnt,
+              countRight: datas.prodRate,
+              state: datas.prodRate == 0 ? 0 : datas.prodRate == 100 ? 2 : 1
+            }
+          ];
+
+          this.loading = false;
+        })
+        .catch(error => {});
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.item-center {
+  .list {
+    display: flex;
+    font-size: 0.8rem;
+    padding-top: 1.5rem;
+    .item {
+      flex: 1;
+      &.no-data {
+        color: #ff7b26;
+      }
+      &.unfinish {
+        color: #fffe00;
+      }
+      &.finish {
+        color: #00ff65;
+      }
+      .icon {
+        display: inline-block;
+        vertical-align: middle;
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+      .title-right {
+        padding-left: 0.3rem;
+      }
+    }
+  }
+}
+</style>

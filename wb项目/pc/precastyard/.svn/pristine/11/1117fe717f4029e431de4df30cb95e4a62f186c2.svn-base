@@ -1,0 +1,85 @@
+<!-- item10模板 -->
+<template>
+<div class="line-item item8">
+  <Title :index=6></Title>
+
+  <div class="center-wrap">
+    <el-carousel class="wrap">
+      <el-carousel-item :style="itemBg1">
+      </el-carousel-item>
+      <el-carousel-item :style="itemBg2">
+
+      </el-carousel-item>
+    </el-carousel>
+  </div>
+
+
+</div>
+</template>
+
+<script>
+import Title from "./title";
+import itemBg1 from "../../assets/test_photo_01.jpg";
+import itemBg2 from "../../assets/test_photo_02.jpg";
+export default {
+  components: {
+    Title
+  },
+  data() {
+    return {
+      itemBg1: {
+        background: `url(${itemBg1}) no-repeat`,
+        backgroundSize: "100% 100%"
+      },
+      itemBg2: {
+        background: `url(${itemBg2}) no-repeat`,
+        backgroundSize: "100% 100%"
+      }
+    };
+  },
+  methods: {},
+  computed: {}
+};
+</script>
+
+<style lang="scss">
+.item8 {
+  .center-wrap {
+    padding: 1rem 5rem;
+    .item-wrap {
+      height: 100%;
+
+      //到时多张图片时把这行代码去掉
+      margin-top: 5rem;
+    }
+    .pic-wrap {
+      height: 48%;
+      padding-bottom: 1%;
+
+      .item-pic {
+        height: 100%;
+      }
+    }
+  }
+  .wrap {
+    height: 100%;
+    border: 1px solid #32ffd9;
+    box-shadow: inset 0 0 20px 0 rgba(50, 255, 217, 0.1);
+  }
+}
+.el-carousel__container {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+// .el-carousel__item:nth-child(2n + 1) {
+//   background: url("../../assets/test_photo_01.jpg") no-repeat;
+//   background-size: 100% 100%;
+// }
+// .el-carousel__item:nth-child(2n) {
+//   background: url("../../assets/test_photo_02.jpg") no-repeat;
+//   background-size: 100% 100%;
+// }
+.el-carousel__button {
+  width: 20px !important;
+}
+</style>

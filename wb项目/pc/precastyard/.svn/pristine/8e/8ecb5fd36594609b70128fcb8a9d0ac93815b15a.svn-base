@@ -1,0 +1,206 @@
+<!-- Item2模板 -->
+<template>
+<el-col :span="8" class="line-item item2" v-loading="loading">
+  <div class="title">
+    <div class="title-name">
+      梁安装比率
+    </div>
+    <!-- <div class="title-sanjiao">
+    </div> -->
+  </div>
+  <div class="item-right">
+    <span class="graphics left"></span>
+    <span class="title2">已完成</span>
+
+    <span class="graphics middle"></span>
+    <span class="title2">完成率(%)</span>
+
+  </div>
+  <div class="item-scale center-wrap" v-if="!noData"></div>
+  <div class="noData" v-if="noData">暂无数据...</div>
+
+</el-col>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      loading: true,
+      noData: false
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      // let that = this
+      this.$customAxios
+        .get("/wpNewBoard/getBridgeSetupRate", {
+          params: {
+            projYardId: this.$cookies.get("board_yardId")
+          }
+        })
+        .then(resq => {
+          if (resq.data.length == 0) {
+            this.loading = false;
+            this.noData = true;
+
+            return;
+          }
+          this.setEcharts(resq.data);
+        })
+        .catch(error => {
+          // this.loading = false;
+        });
+    },
+    // 生成echarts
+    setEcharts(list) {
+      let nameList = [];
+      let ValueRate = [];
+      let actCntList = [];
+      let planCntList = [];
+      list.forEach(item => {
+        nameList.push(item.bridgeName);
+        actCntList.push(item.actCnt);
+        planCntList.push(item.planCnt);
+        ValueRate.push((item.actCnt / item.planCnt).toFixed(2) * 100);
+      });
+
+      this.$echarts.init(document.querySelector(".item-scale")).setOption({
+        grid: {
+          top: 10,
+          left: 45,
+          right: 45,
+          bottom: 40
+        },
+        xAxis: {
+          type: "category",
+          top: 4,
+          data: nameList,
+          axisLabel: {
+            interval: 0,
+            rotate: 45,
+            margin: 5,
+            textStyle: {
+              color: "#fff"
+            }
+          }
+        },
+        yAxis: [
+          {
+            type: "value",
+            // axisLine: {
+            //   show: false
+            // },
+            axisLabel: {
+              textStyle: {
+                color: "#fff"
+              }
+            }
+            // axisLine: {
+            //   lineStyle: {
+            //     color: "#862CF8"
+            //   }
+            // }
+          },
+          {
+            type: "value",
+            min: 0,
+            max: 100,
+            // axisLine: {
+            //   show: false
+            // },
+            splitLine: {
+              show: false
+            },
+            axisLabel: {
+              formatter: "{value} %",
+              textStyle: {
+                color: "#fff"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            data: actCntList,
+            type: "bar",
+            stack: "bar",
+            barWidth: 15, //柱图宽度
+            itemStyle: {
+              color: "#862CF8",
+              borderColor: "#862CF8"
+            }
+          },
+          {
+            data: planCntList,
+            type: "bar",
+            stack: "bar",
+            barWidth: 15, //柱图宽度
+            itemStyle: {
+              color: "rgba(0,0,0, 0.1)",
+              borderColor: "#862CF8"
+              // opacity: 0
+              // background:'none'
+            }
+          },
+          {
+            data: ValueRate,
+            type: "line",
+            yAxisIndex: 1,
+            itemStyle: {
+              color: "#FFCB00"
+            }
+          }
+        ]
+      });
+      this.loading = false;
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.item2 {
+  .item-right {
+    position: absolute;
+    right: 1.5rem;
+    top: 2rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    .graphics {
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+
+      &.left {
+        background: #862cf8;
+      }
+      &.middle {
+        background: #ffcb00;
+      }
+    }
+    .title2 {
+      font-family: PingFangSC-Regular;
+      font-size: 0.8rem;
+      color: #ffffff;
+      padding-right: 0.8rem;
+    }
+  }
+  .noData {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    top: 10rem;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+}
+.item-scale {
+  padding: 2rem 1rem !important;
+}
+</style>

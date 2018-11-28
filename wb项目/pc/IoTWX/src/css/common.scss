@@ -1,0 +1,198 @@
+/* ------------------------------------------------------------
+   通用基础样式
+------------------------------------------------------------ */
+html {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+
+#app,
+body {
+  height: 100%;
+  background: #f5f8fa;
+}
+/* ------------------------------------------------------------
+   布局
+------------------------------------------------------------ */
+.grid-list {
+  display: table;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.grid-list-item {
+  display: table-cell !important;
+  vertical-align: middle;
+}
+
+.clearfix:after {
+  content: "";
+  height: 0;
+  line-height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.centerLayout {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.cursor-point {
+  cursor: pointer;
+}
+
+.over-height {
+  height: 100%;
+}
+/* ------------------------------------------------------------
+   样式
+------------------------------------------------------------ */
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.border {
+  border: solid 1px #dcdfe1;
+}
+
+.boder-bottom {
+  border-bottom: solid 1px #dcdfe1;
+}
+
+.margin-left {
+  margin-left: 10px;
+}
+
+.margin-bottom {
+  margin-bottom: 10px;
+}
+
+.padding-reset {
+  padding: 0 !important;
+}
+
+.padding {
+  padding: 10px !important;
+}
+
+.padding-left {
+  padding-left: 15px;
+}
+
+.elmain {
+  padding: 10px;
+  width: calc(100% - 250px);
+}
+/* ------------------------------------------------------------
+   颜色
+------------------------------------------------------------ */
+.primary-color {
+  color: #17b990;
+}
+
+.primary-color-01 {
+  color: #818886;
+}
+
+.primary-color-02 {
+  color: #333;
+}
+
+.primary-color-03 {
+  color: #999;
+}
+
+.primary-color-04 {
+  color: #666;
+}
+
+.primary-color-white {
+  color: #fff;
+}
+
+.primary-color-bg {
+  background: #17b990;
+}
+
+.primary-color-bg-white {
+  background: #fff;
+}
+/* ------------------------------------------------------------
+   字体
+------------------------------------------------------------ */
+.font-size-14 {
+  font-size: 14px;
+}
+
+.font-size-16 {
+  font-size: 16px;
+}
+
+.font-size-18 {
+  font-size: 18px;
+}
+
+.font-size-20 {
+  font-size: 20px;
+}
+
+.font-size-22 {
+  font-size: 22px;
+}
+
+.font-size-24 {
+  font-size: 24px;
+}
+
+.font-size-48 {
+  font-size: 48px;
+}
+/* ------------------------------------------------------------
+   动画
+------------------------------------------------------------ */
+@-webkit-keyframes load {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 70%;
+  }
+}
+/* ------------------------------------------------------------
+   type="number"去掉三角形
+------------------------------------------------------------ */
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

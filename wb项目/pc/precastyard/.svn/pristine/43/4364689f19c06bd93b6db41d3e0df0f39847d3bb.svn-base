@@ -1,0 +1,102 @@
+<!-- Item2模板 -->
+<template>
+<el-col :span="8" class="line-item item2" v-loading="loading">
+  <div class="title">
+    <div class="title-name">
+      梁安装比率
+    </div>
+    <!-- <div class="title-sanjiao">
+    </div> -->
+  </div>
+  <div class="item-scale center-wrap"></div>
+
+</el-col>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      loading: true
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    // 请求数据
+    getData() {
+      // let that = this
+      this.$customAxios
+        .get("/wpBoard/getBridgeSetupRate", {
+          params: {
+            projid: "55400",
+            pactid: "1001002414",
+            yardid: "AB8D519B-242E-4F98-B647-EC6AAE496F0F"
+          }
+        })
+        .then(resq => {
+          this.setEcharts(resq.data);
+        })
+        .catch(error => {});
+    },
+    // 生成echarts
+    setEcharts(list) {
+      let nameList = [];
+      let ValueList = [];
+      for (let i in list) {
+        nameList.push(i);
+        ValueList.push(list[i]);
+      }
+
+      this.$echarts.init(document.querySelector(".item-scale")).setOption({
+        color: ["#FFE000"],
+        grid: {
+          top: 20,
+          bottom: 50
+          // x: 40
+          // x2: 100,
+          // y2: 100 // y2可以控制 X轴跟Zoom控件之间的间隔，避免以为倾斜后造成 label重叠到zoom上
+        },
+        xAxis: {
+          type: "category",
+          top: 4,
+          data: nameList,
+          axisLabel: {
+            interval: 0,
+            rotate: 45,
+            margin: 5,
+
+            textStyle: {
+              color: "#fff"
+            }
+          }
+        },
+        yAxis: {
+          type: "value",
+          axisLabel: {
+            formatter: "{value} %",
+            textStyle: {
+              color: "#fff"
+            }
+          }
+        },
+        series: [
+          {
+            data: ValueList,
+            type: "bar",
+            barWidth: 15 //柱图宽度
+          }
+        ]
+      });
+      this.loading = false;
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.item-scale {
+  padding: 2rem 1rem !important;
+}
+</style>

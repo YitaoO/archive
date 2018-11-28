@@ -1,0 +1,29 @@
+/* ------------------------------------------------------------
+   公共部分
+------------------------------------------------------------ */
+.section{
+    font-size: 14px;
+    padding: 10px;
+    background-color: #fff;
+    height: 100rpx;
+    line-height: 100rpx;
+    border-bottom: 1rpx solid #ccc;
+}
+.title{
+   width: 40%;
+
+}
+
+.title-input,.data{
+    text-align: right;
+}
+.picker{
+  /* width: 100%;
+  height: 100%; */
+}
+.btn{
+  position: fixed;
+  width:100%;
+
+  bottom: 0;
+}

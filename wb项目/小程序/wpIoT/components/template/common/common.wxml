@@ -1,0 +1,21 @@
+<!-- 通用模版 -->
+
+<!-- 无网络 -->
+<template name='noNetwork'  >
+
+  <view class="common-wrap" wx:if="{{showNoNetwork}}" >
+    <view class="image">
+      <image class="noNetwork" style=""   mode="scaleToFill"></image>
+    </view>
+    <view class="title-no">暂无网络...</view>
+  </view>
+</template>
+<!-- 空数据 -->
+<template name='noDate' >
+  <view class="common-wrap" wx:if="{{list.length ==0}}" >
+    <view class="image">
+      <image class="noDate" style=""   mode="scaleToFill"></image>
+    </view>
+    <view class="title-no">暂无数据...</view>
+  </view>
+</template>
