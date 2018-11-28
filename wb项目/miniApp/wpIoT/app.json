@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/test/test",
     "pages/index/index",
     "pages/dataCenter/dataCenter",
     "pages/alarm/alarm",
@@ -27,47 +26,44 @@
   ],
   "window": {
     "navigationBarTitleText": "微柏空调监控",
-    "navigationBarBackgroundColor": "#17B990",
+    "navigationBarBackgroundColor":"#17B990",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#eeeeee",
     "backgroundTextStyle": "light",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh":false
   },
   "tabBar": {
-    "selectedColor": "#16BB99",
-    "position": "bottom",
+    "selectedColor":"#16BB99",
+    "position":"bottom",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "./img/shouye.png",
-        "selectedIconPath": "./img/shouye-v.png"
-      },
-      {
-        "pagePath": "pages/dataCenter/dataCenter",
-        "text": "区域",
-        "iconPath": "./img/quyu.png",
-        "selectedIconPath": "./img/quyu-v.png"
-      },
-      {
-        "pagePath": "pages/alarm/alarm",
-        "text": "告警",
-        "iconPath": "./img/gaojing.png",
-        "selectedIconPath": "./img/gaojing-v.png"
-      },
-      {
-        "pagePath": "pages/workBench/workBench",
-        "text": "工作台",
-        "iconPath": "./img/gongzuotai.png",
-        "selectedIconPath": "./img/gongzuotai-v.png"
-      },
-      {
-        "pagePath": "pages/me/me",
-        "text": "我的",
-        "iconPath": "./img/wode.png",
-        "selectedIconPath": "./img/wode-v.png"
-      }
-    ]
+     "pagePath": "pages/index/index",
+     "text": "首页",
+     "iconPath":"./img/shouye.png",
+     "selectedIconPath":"./img/shouye-v.png"
+     },
+    {
+      "pagePath": "pages/dataCenter/dataCenter",
+      "text": "区域",
+      "iconPath":"./img/quyu.png",
+      "selectedIconPath":"./img/quyu-v.png"
+    },{
+      "pagePath": "pages/alarm/alarm",
+      "text": "告警",
+      "iconPath":"./img/gaojing.png",
+      "selectedIconPath":"./img/gaojing-v.png"
+    }, {
+      "pagePath": "pages/workBench/workBench",
+      "text": "工作台",
+      "iconPath":"./img/gongzuotai.png",
+      "selectedIconPath":"./img/gongzuotai-v.png"
+    },{
+      "pagePath": "pages/me/me",
+      "text": "我的",
+      "iconPath":"./img/wode.png",
+      "selectedIconPath":"./img/wode-v.png"
+    }
+  ]
   },
   "networkTimeout": {
     "request": 10000,

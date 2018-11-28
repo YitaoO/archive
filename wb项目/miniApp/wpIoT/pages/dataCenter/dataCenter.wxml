@@ -3,7 +3,7 @@
 <template is="noNetwork" data="{{showNoNetwork}}"></template>
 <template is="noDate" data="{{list}}"></template>
 <view>
-  <view  wx:for="{{list}}" wx:key="{{list}}" class="view-item ">
+  <view wx:for="{{list}}" wx:key="{{list}}" class="view-item ">
     <view data-title="{{item.areaName}}" data-areaid="{{item.areaId}}" bindtap="goDetailView" data-subareacount="{{item.subAreaCount}}" data-areaname="{{item.areaName}}">
       <view class="item-top grid-list">
         <p class="top-left grid-list-item">
