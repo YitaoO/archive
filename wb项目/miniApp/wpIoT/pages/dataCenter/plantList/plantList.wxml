@@ -1,7 +1,0 @@
-<import src='../../../components/template/common/common.wxml'/>
-<template is="noNetwork" data="{{showNoNetwork}}"></template>
-<template is="noDate" data="{{list}}"></template>
-
-<view wx:for="{{list}}" wx:key="{{list}}" data-cpkid="{{item.kid}}" data-title="{{item.title}}" class="view-item " bindtap="goMandispatchlView">
-    <text>{{item.title}}</text>
-</view>

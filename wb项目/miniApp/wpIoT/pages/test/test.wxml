@@ -1,3 +1,0 @@
-<view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-  <view>这是测试</view>
-</view>

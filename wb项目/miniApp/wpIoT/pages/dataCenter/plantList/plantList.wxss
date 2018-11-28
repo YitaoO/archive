@@ -1,7 +1,0 @@
-
-.view-item{
-  padding-left:10rpx;
-  line-height: 100rpx;
-  height: 100rpx;
-  border-bottom: 1px solid #ccc;
-}

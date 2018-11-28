@@ -1,6 +1,0 @@
-{
-    "navigationBarTitleText": "派单",
-    "usingComponents": {
-    "camera": "../../../components/Camera/camera"
-    }
-  }

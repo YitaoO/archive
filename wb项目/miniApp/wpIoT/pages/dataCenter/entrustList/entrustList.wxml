@@ -1,3 +1,0 @@
-<view wx:for="{{list}}" wx:key="{{list}}" data-userid="{{item.userId}}" data-username="{{item.name}}" class="view-item " bindtap="goMandispatchlView">
-    <text>{{item.name}}</text>
-</view>

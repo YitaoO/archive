@@ -1,6 +1,0 @@
-{
-    "navigationBarTitleText": "巡检",
-    "usingComponents": {
-    "camera": "../../../components/Camera/camera"
-    }
-  }
